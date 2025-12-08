@@ -18,6 +18,10 @@
     "format": "prettier --write --experimental-cli src/"
   },
   "dependencies": {
+    "@fontsource/ibm-plex-sans-arabic": "^5.2.8",
+    "@fontsource/outfit": "^5.2.8",
+    "@fontsource/source-sans-3": "^5.2.9",
+    "@fontsource/tajawal": "^5.2.7",
     "@mdi/font": "^7.4.47",
     "@vueuse/core": "^14.1.0",
     "@vueuse/motion": "^3.0.3",
