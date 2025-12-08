@@ -1,0 +1,247 @@
+# ============================================
+# SITE METADATA
+# ============================================
+site:
+  title: "Your Name | Software Engineer"
+  description: "Personal portfolio showcasing my work and skills."
+  url: "https://yoursite.dev"
+  defaultLocale: "en"
+  supportedLocales:
+    - code: "en"
+      name: "English"
+      dir: "ltr"
+    - code: "ar"
+      name: "العربية"
+      dir: "rtl"
+
+# ============================================
+# PERSONAL INFO
+# ============================================
+personal:
+  name:
+    en: "Jane"
+    ar: "محمد"
+  lastName:
+    en: "Doe"
+    ar: "أحمد"
+  title:
+    en: "Software Engineer"
+    ar: "مهندسة برمجيات"
+  tagline:
+    en: "Building things that matter."
+    ar: "أبني أشياء ذات قيمة."
+  email: "hello@example.com"
+  location:
+    en: "Mecca, Saudi Arabia"
+    ar: "مكة المكرمة"
+  avatar:
+    enabled: false
+    src: "/images/avatar.jpg"
+
+# ============================================
+# SOCIAL LINKS
+# ============================================
+socials:
+  - platform: "github"
+    url: "https://github.com"
+    icon: "github"
+  - platform: "linkedin"
+    url: "https://linkedin.com"
+    icon: "linkedin"
+  - platform: "twitter"
+    url: "https://twitter.com"
+    icon: "twitter"
+  - platform: "email"
+    url: "mailto:hello@example.com"
+    icon: "mail"
+
+# ============================================
+# NAVIGATION & SECTIONS
+# ============================================
+sections:
+  hero:
+    enabled: true
+  about:
+    enabled: true
+  projects:
+    enabled: true
+  blog:
+    enabled: false
+  resume:
+    enabled: true
+    pdfPath: "/resume.pdf"
+  contact:
+    enabled: true
+    showForm: false
+
+# ============================================
+# ABOUT SECTION
+# ============================================
+about:
+  content:
+    en: |
+      I'm a software engineer passionate about building products that make
+      a difference. I enjoy solving complex problems and creating elegant
+      solutions that users love.
+
+      When I'm not coding, you'll find me reading, hiking, or experimenting
+      with new technologies.
+    ar: |
+      أنا مهندسة برمجيات شغوفة ببناء منتجات تحدث فرقاً.
+      أستمتع بحل المشكلات المعقدة وإنشاء حلول أنيقة يحبها المستخدمون.
+
+      عندما لا أكتب الكود، ستجدني أقرأ أو أتنزه أو أجرب تقنيات جديدة.
+
+# ============================================
+# SKILLS
+# ============================================
+skills:
+  - "Vue"
+  - "TypeScript"
+  - "Node.js"
+  - "Design Systems"
+
+# ============================================
+# PROJECTS
+# ============================================
+projects:
+  - id: "project-1"
+    title:
+      en: "Project Alpha"
+      ar: "مشروع ألفا"
+    description:
+      en: "A brief description of what this project does and why it matters."
+      ar: "وصف موجز لما يفعله هذا المشروع ولماذا هو مهم."
+    image: "https://picsum.photos/seed/alpha/800/600"
+    tech:
+      - "Vue"
+      - "Node.js"
+      - "PostgreSQL"
+    links:
+      live: "https://example.com"
+      github: "https://github.com"
+    featured: true
+
+  - id: "project-2"
+    title:
+      en: "Project Beta"
+      ar: "مشروع بيتا"
+    description:
+      en: "Another amazing project with a compelling description."
+      ar: "مشروع رائع آخر مع وصف مقنع."
+    image: "https://picsum.photos/seed/beta/800/600"
+    tech:
+      - "React"
+      - "GraphQL"
+      - "AWS"
+    links:
+      live: "https://example.com"
+      github: "https://github.com"
+    featured: true
+
+  - id: "project-3"
+    title:
+      en: "Project Gamma"
+      ar: "مشروع جاما"
+    description:
+      en: "An open-source tool that helps developers be more productive."
+      ar: "أداة مفتوحة المصدر تساعد المطورين على أن يكونوا أكثر إنتاجية."
+    image: "https://picsum.photos/seed/gamma/800/600"
+    tech:
+      - "TypeScript"
+      - "CLI"
+      - "Jest"
+    links:
+      github: "https://github.com"
+    featured: true
+
+  - id: "project-4"
+    title:
+      en: "Project Delta"
+      ar: "مشروع دلتا"
+    description:
+      en: "A mobile app that solves a real-world problem."
+      ar: "تطبيق جوال يحل مشكلة حقيقية."
+    image: "https://picsum.photos/seed/delta/800/600"
+    tech:
+      - "React Native"
+      - "Firebase"
+      - "Expo"
+    links:
+      live: "https://example.com"
+      github: "https://github.com"
+    featured: true
+
+# ============================================
+# BLOG POSTS (if enabled)
+# ============================================
+blog:
+  posts:
+    - id: "1"
+      title:
+        en: "Getting Started with Vue 3"
+        ar: "البدء مع Vue 3"
+      date: "2024-01-15"
+      excerpt:
+        en: "A beginner's guide to building modern web applications with Vue 3."
+        ar: "دليل المبتدئين لبناء تطبيقات الويب الحديثة باستخدام Vue 3."
+      url: "#"
+
+    - id: "2"
+      title:
+        en: "Why TypeScript Matters"
+        ar: "لماذا TypeScript مهم"
+      date: "2023-09-12"
+      excerpt:
+        en: "Exploring the benefits of type safety in JavaScript projects."
+        ar: "استكشاف فوائد أمان النوع في مشاريع JavaScript."
+      url: "#"
+
+# ============================================
+# THEME CONFIGURATION
+# ============================================
+theme:
+  defaultMode: "system"
+  colors:
+    light:
+      bgPrimary: "#FAFAF9"
+      bgSecondary: "#F0F0EE"
+      textPrimary: "#1A1A1A"
+      textSecondary: "#5C5C5C"
+      accent: "#4A7C59"
+      accentHover: "#3D6B4A"
+      accentSubtle: "#E8F0EA"
+      border: "#E5E5E3"
+    dark:
+      bgPrimary: "#121212"
+      bgSecondary: "#1E1E1E"
+      textPrimary: "#EDEDED"
+      textSecondary: "#A0A0A0"
+      accent: "#6B9B7A"
+      accentHover: "#7DAB8C"
+      accentSubtle: "#1A2E1F"
+      border: "#2A2A2A"
+
+# ============================================
+# TYPOGRAPHY
+# ============================================
+typography:
+  fonts:
+    en:
+      display: "Outfit"
+      body: "Source Sans 3"
+    ar:
+      display: "Tajawal"
+      body: "IBM Plex Sans Arabic"
+
+# ============================================
+# ANIMATIONS
+# ============================================
+animations:
+  enabled: true
+  respectReducedMotion: true
+  hero:
+    cursorFollow: true
+    toy: true
+  scrollReveal: true
+  hoverEffects: true
