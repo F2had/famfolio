@@ -4,6 +4,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import yaml from '@modyfi/vite-plugin-yaml'
+import Icons from 'unplugin-icons/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -11,6 +12,7 @@ export default defineConfig({
     vue(),
     vueDevTools(),
     yaml(),
+    Icons({ compiler: 'vue3' }),
   ],
   resolve: {
     alias: {

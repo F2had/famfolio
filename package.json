@@ -25,12 +25,13 @@
     "@mdi/font": "^7.4.47",
     "@vueuse/core": "^14.1.0",
     "@vueuse/motion": "^3.0.3",
-    "lucide-vue-next": "^0.556.0",
     "vue": "^3.5.25",
     "vue-i18n": "^11.2.2",
     "vuetify": "^3.11.2"
   },
   "devDependencies": {
+    "@iconify-json/lucide": "^1.2.79",
+    "@iconify-json/simple-icons": "^1.2.62",
     "@modyfi/vite-plugin-yaml": "^1.1.1",
     "@prettier/plugin-oxc": "^0.0.5",
     "@tsconfig/node24": "^24.0.3",
@@ -48,6 +49,7 @@
     "prettier": "3.6.2",
     "sass": "^1.94.2",
     "typescript": "~5.9.0",
+    "unplugin-icons": "^22.5.0",
     "vite": "npm:rolldown-vite@latest",
     "vite-plugin-vue-devtools": "^8.0.5",
     "vue-tsc": "^3.1.5"
