@@ -18,7 +18,13 @@
     "format": "prettier --write --experimental-cli src/"
   },
   "dependencies": {
-    "vue": "^3.5.25"
+    "@mdi/font": "^7.4.47",
+    "@vueuse/core": "^14.1.0",
+    "@vueuse/motion": "^3.0.3",
+    "lucide-vue-next": "^0.556.0",
+    "vue": "^3.5.25",
+    "vue-i18n": "^11.2.2",
+    "vuetify": "^3.11.2"
   },
   "devDependencies": {
     "@prettier/plugin-oxc": "^0.0.5",
