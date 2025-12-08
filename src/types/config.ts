@@ -6,6 +6,7 @@ export type LocalizedString = {
 export type SupportedLocale = {
   code: 'en' | 'ar'
   name: string
+  nativeName: string
   dir: 'ltr' | 'rtl'
 }
 
