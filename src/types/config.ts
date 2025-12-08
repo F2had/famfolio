@@ -60,7 +60,8 @@ export type AboutConfig = {
 
 export type ProjectLinks = {
   live?: string
-  github?: string
+  code?: string
+  codeIcon?: 'github' | 'gitlab' | 'bitbucket' | 'codeberg' | 'forgejo' | 'gitea'
 }
 
 export type Project = {

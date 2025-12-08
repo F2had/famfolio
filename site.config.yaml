@@ -121,7 +121,7 @@ projects:
       - "PostgreSQL"
     links:
       live: "https://example.com"
-      github: "https://github.com"
+      code: "https://github.com/example/project-alpha"
     featured: true
 
   - id: "project-2"
@@ -138,7 +138,7 @@ projects:
       - "AWS"
     links:
       live: "https://example.com"
-      github: "https://github.com"
+      code: "https://github.com/example/project-beta"
     featured: true
 
   - id: "project-3"
@@ -154,7 +154,7 @@ projects:
       - "CLI"
       - "Jest"
     links:
-      github: "https://github.com"
+      code: "https://github.com/example/project-gamma"
     featured: true
 
   - id: "project-4"
@@ -171,7 +171,7 @@ projects:
       - "Expo"
     links:
       live: "https://example.com"
-      github: "https://github.com"
+      code: "https://github.com/example/project-delta"
     featured: true
 
 # ============================================
