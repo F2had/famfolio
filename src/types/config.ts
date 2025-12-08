@@ -1,10 +1,12 @@
-export type LocalizedString = {
-  en: string
-  ar: string
-}
+// Single source of truth for supported locales
+export const LOCALES = ['en', 'ar'] as const
+
+export type LocaleCode = (typeof LOCALES)[number]
+
+export type LocalizedString = Record<LocaleCode, string>
 
 export type SupportedLocale = {
-  code: 'en' | 'ar'
+  code: LocaleCode
   name: string
   nativeName: string
   dir: 'ltr' | 'rtl'
@@ -14,7 +16,7 @@ export type SiteMetadata = {
   title: string
   description: string
   url: string
-  defaultLocale: 'en' | 'ar'
+  defaultLocale: LocaleCode
   supportedLocales: SupportedLocale[]
 }
 
@@ -108,10 +110,7 @@ export type FontConfig = {
 }
 
 export type TypographyConfig = {
-  fonts: {
-    en: FontConfig
-    ar: FontConfig
-  }
+  fonts: Record<LocaleCode, FontConfig>
 }
 
 export type AnimationsConfig = {

@@ -2,9 +2,7 @@ import { computed, watch, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useStorage } from '@vueuse/core'
 import config from '@config'
-import type { SupportedLocale } from '@/types/config'
-
-type LocaleCode = SupportedLocale['code']
+import type { LocaleCode } from '@/types/config'
 
 const storageKey = 'famfolio-locale'
 
