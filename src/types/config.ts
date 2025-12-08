@@ -32,7 +32,7 @@ export type PersonalInfo = {
 }
 
 export type SocialLink = {
-  platform: 'github' | 'linkedin' | 'twitter' | 'email' | 'instagram' | 'dribbble'
+  platform: string
   url: string
   icon: string
 }
