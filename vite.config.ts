@@ -18,4 +18,15 @@ export default defineConfig({
       '@config': fileURLToPath(new URL('./site.config.yaml', import.meta.url)),
     },
   },
+  build: {
+    rollupOptions: {
+      onwarn(warning, warn) {
+        // Suppress vue-i18n internal warning
+        if (warning.code === 'IMPORT_IS_UNDEFINED' && warning.message.includes('currentInstance')) {
+          return
+        }
+        warn(warning)
+      },
+    },
+  },
 })
