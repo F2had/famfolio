@@ -9,9 +9,11 @@ site:
   supportedLocales:
     - code: "en"
       name: "English"
+      nativeName: "English"
       dir: "ltr"
     - code: "ar"
-      name: "العربية"
+      name: "Arabic"
+      nativeName: "العربية"
       dir: "rtl"
 
 # ============================================
