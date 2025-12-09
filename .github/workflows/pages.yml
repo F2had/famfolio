@@ -68,7 +68,7 @@ jobs:
         run: bun install
 
       - name: Build
-        run: bun run build-only
+        run: bun run build-only && cp dist/index.html dist/404.html
         env:
           BASE_URL: /${{ github.event.repository.name }}/
           CONFIG_FILE: ${{ inputs.config }}
