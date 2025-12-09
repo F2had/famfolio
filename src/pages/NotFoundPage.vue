@@ -410,7 +410,7 @@ onUnmounted(() => {
     color: var(--accent);
     line-height: 1;
     margin-bottom: var(--space-md);
-    opacity: 0.15;
+    opacity: 0.4;
 
     &--animated {
       animation: float 4s ease-in-out infinite;
