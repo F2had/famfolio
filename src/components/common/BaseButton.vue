@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { reactive, computed } from 'vue'
+import { useSpring } from '@vueuse/motion'
+
 type Props = {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost'
   size?: 'sm' | 'md' | 'lg'
@@ -24,6 +27,33 @@ const linkAttrs = props.href
       rel: props.external ? 'noopener noreferrer' : undefined,
     }
   : {}
+
+// Spring-based press animation
+const pressTarget = reactive({ scale: 1 })
+const pressSpring = useSpring(pressTarget, {
+  stiffness: 400,
+  damping: 15,
+})
+const pressValues = pressSpring.values as unknown as { scale: number }
+const setPress = pressSpring.set as (v: { scale: number }) => void
+
+const handleMouseDown = () => {
+  if (!props.disabled && !props.loading) {
+    setPress({ scale: 0.95 })
+  }
+}
+
+const handleMouseUp = () => {
+  setPress({ scale: 1 })
+}
+
+const handleMouseLeave = () => {
+  setPress({ scale: 1 })
+}
+
+const buttonStyle = computed(() => ({
+  transform: `scale(${pressValues.scale})`,
+}))
 </script>
 
 <template>
@@ -36,7 +66,11 @@ const linkAttrs = props.href
       `base-button--${size}`,
       { 'base-button--loading': loading, 'base-button--disabled': disabled },
     ]"
+    :style="buttonStyle"
     :disabled="disabled || loading"
+    @mousedown="handleMouseDown"
+    @mouseup="handleMouseUp"
+    @mouseleave="handleMouseLeave"
   >
     <span v-if="loading" class="base-button__spinner" />
     <span class="base-button__content" :class="{ 'base-button__content--hidden': loading }">
@@ -59,13 +93,9 @@ const linkAttrs = props.href
   transition:
     background-color var(--transition-fast),
     color var(--transition-fast),
-    transform var(--transition-fast),
     box-shadow var(--transition-fast);
   position: relative;
-
-  &:active:not(:disabled) {
-    transform: scale(0.97);
-  }
+  will-change: transform;
 
   // Variants
   &--primary {
