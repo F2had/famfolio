@@ -1,6 +1,9 @@
 {
   "name": "famfolio",
-  "version": "0.0.0",
+  "version": "0.9.0",
+  "description": "A modern, configurable Vue 3 portfolio template with RTL support, animations, and dark mode",
+  "author": "F2had",
+  "license": "MIT",
   "private": true,
   "type": "module",
   "engines": {
@@ -16,6 +19,11 @@
     "lint:eslint": "eslint . --fix --cache",
     "lint": "run-s lint:*",
     "format": "prettier --write --experimental-cli src/",
+    "generate:og": "bun run scripts/generate-og.ts",
+    "generate:og:all": "bun run scripts/generate-og.ts --locale=all",
+    "ci:test": "act push --container-architecture linux/amd64",
+    "ci:test:lint": "act push --container-architecture linux/amd64 -j lint-and-build",
+    "ci:test:security": "act push --container-architecture linux/amd64 -j security",
     "prepare": "husky"
   },
   "dependencies": {
