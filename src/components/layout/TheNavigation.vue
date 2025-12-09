@@ -1,33 +1,38 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useSettings } from '@/composables/useSettings'
 import { useConfig } from '@/composables/useConfig'
-import { useTheme } from '@/composables/useTheme'
-import { useLocale } from '@/composables/useLocale'
+import ThemeToggle from '@/components/common/ThemeToggle.vue'
+import LocaleToggle from '@/components/common/LocaleToggle.vue'
+import MascotToggle from '@/components/common/MascotToggle.vue'
 
 // Icons
-import IconSun from '~icons/lucide/sun'
-import IconMoon from '~icons/lucide/moon'
-import IconGlobe from '~icons/lucide/globe'
 import IconMenu from '~icons/lucide/menu'
 import IconX from '~icons/lucide/x'
 
+const emit = defineEmits<{
+  themeToggle: [position: { x: number; y: number }]
+  localeToggle: [data: { x: number; y: number; fromLocale: string; toLocale: string }]
+}>()
+
 const { t } = useI18n()
-const { sections } = useConfig()
-const { isDark, toggle: toggleTheme } = useTheme()
-const { locale, supportedLocales, toggle: toggleLocale } = useLocale()
+const { site } = useConfig()
+const { isAboutEnabled, isProjectsEnabled, isBlogEnabled, isContactEnabled, isToyEnabled } = useSettings()
+
+const logoConfig = computed(() => site.logo)
 
 const isVisible = ref(false)
 const isMobileMenuOpen = ref(false)
 
-const navItems = [
-  { id: 'about', label: 'nav.about', enabled: sections.about.enabled },
-  { id: 'projects', label: 'nav.projects', enabled: sections.projects.enabled },
-  { id: 'blog', label: 'nav.blog', enabled: sections.blog.enabled },
-  { id: 'contact', label: 'nav.contact', enabled: sections.contact.enabled },
-]
-
-const activeItems = navItems.filter((item) => item.enabled)
+const activeItems = computed(() =>
+  [
+    { id: 'about', label: 'nav.about', enabled: isAboutEnabled.value },
+    { id: 'projects', label: 'nav.projects', enabled: isProjectsEnabled.value },
+    { id: 'blog', label: 'nav.blog', enabled: isBlogEnabled.value },
+    { id: 'contact', label: 'nav.contact', enabled: isContactEnabled.value },
+  ].filter((item) => item.enabled),
+)
 
 const scrollToSection = (id: string) => {
   const element = document.getElementById(id)
@@ -49,13 +54,21 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
 })
-
-const currentLocaleNative = supportedLocales.find((l) => l.code === locale.value)?.nativeName
 </script>
 
 <template>
   <header class="nav" :class="{ 'nav--visible': isVisible }">
     <nav class="nav__container">
+      <!-- Logo -->
+      <a
+        v-if="logoConfig?.enabled"
+        href="#"
+        class="nav__logo"
+        @click.prevent="scrollToSection('hero')"
+      >
+        <img :src="logoConfig.src" :alt="logoConfig.alt" class="nav__logo-img" />
+      </a>
+
       <!-- Desktop Navigation -->
       <ul class="nav__links">
         <li v-for="item in activeItems" :key="item.id">
@@ -66,21 +79,14 @@ const currentLocaleNative = supportedLocales.find((l) => l.code === locale.value
       </ul>
 
       <div class="nav__actions">
+        <!-- Mascot Toggle (only if mascot is enabled in config) -->
+        <MascotToggle v-if="isToyEnabled" />
+
         <!-- Theme Toggle -->
-        <button
-          class="nav__icon-btn"
-          :aria-label="isDark ? t('theme.switchToLight') : t('theme.switchToDark')"
-          @click="toggleTheme"
-        >
-          <IconMoon v-if="isDark" />
-          <IconSun v-else />
-        </button>
+        <ThemeToggle @before-toggle="(pos) => emit('themeToggle', pos)" />
 
         <!-- Locale Toggle -->
-        <button class="nav__icon-btn nav__locale-btn" :aria-label="t('language.select')" @click="toggleLocale">
-          <IconGlobe />
-          <span class="nav__locale-label">{{ currentLocaleNative }}</span>
-        </button>
+        <LocaleToggle @before-toggle="(data) => emit('localeToggle', data)" />
 
         <!-- Mobile Menu Toggle -->
         <button
@@ -141,6 +147,17 @@ const currentLocaleNative = supportedLocales.find((l) => l.code === locale.value
     padding: var(--space-md) var(--container-padding);
   }
 
+  &__logo {
+    display: flex;
+    align-items: center;
+    margin-inline-end: var(--space-lg);
+  }
+
+  &__logo-img {
+    height: 32px;
+    width: auto;
+  }
+
   &__links {
     display: none;
     gap: var(--space-sm);
@@ -193,22 +210,6 @@ const currentLocaleNative = supportedLocales.find((l) => l.code === locale.value
     svg {
       width: 20px;
       height: 20px;
-    }
-  }
-
-  &__locale-btn {
-    width: auto;
-    padding-inline: var(--space-sm);
-    gap: var(--space-xs);
-  }
-
-  &__locale-label {
-    font-family: var(--font-display);
-    font-size: var(--text-sm);
-    font-weight: 500;
-
-    @media (max-width: 480px) {
-      display: none;
     }
   }
 
