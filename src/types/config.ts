@@ -12,10 +12,23 @@ export type SupportedLocale = {
   dir: 'ltr' | 'rtl'
 }
 
+export type FaviconConfig = {
+  svg: string
+  ico: string
+}
+
+export type LogoConfig = {
+  enabled: boolean
+  src: string
+  alt: string
+}
+
 export type SiteMetadata = {
   title: string
   description: string
   url: string
+  favicon: FaviconConfig
+  logo: LogoConfig
   defaultLocale: LocaleCode
   supportedLocales: SupportedLocale[]
 }
@@ -114,6 +127,17 @@ export type TypographyConfig = {
   fonts: Record<LocaleCode, FontConfig>
 }
 
+export type TransitionsConfig = {
+  theme: {
+    enabled: boolean
+  }
+  locale: {
+    enabled: boolean
+    directionChange: 'pageFlip' | 'cardFlip'
+    sameDirection: 'ripple' | 'fade'
+  }
+}
+
 export type AnimationsConfig = {
   enabled: boolean
   respectReducedMotion: boolean
@@ -123,10 +147,36 @@ export type AnimationsConfig = {
   }
   scrollReveal: boolean
   hoverEffects: boolean
+  transitions: TransitionsConfig
+}
+
+export type DefaultsConfig = {
+  codeForge: string
+}
+
+export type EmailSecurityConfig = {
+  obfuscate: boolean
+  clickToReveal: boolean
+}
+
+export type ContactSecurityConfig = {
+  honeypot: boolean
+}
+
+export type ExternalLinksSecurityConfig = {
+  noopener: boolean
+  newTab: boolean
+}
+
+export type SecurityConfig = {
+  email: EmailSecurityConfig
+  contact: ContactSecurityConfig
+  externalLinks: ExternalLinksSecurityConfig
 }
 
 export type SiteConfig = {
   site: SiteMetadata
+  defaults: DefaultsConfig
   personal: PersonalInfo
   socials: SocialLink[]
   sections: SectionsConfig
@@ -137,4 +187,5 @@ export type SiteConfig = {
   theme: ThemeConfig
   typography: TypographyConfig
   animations: AnimationsConfig
+  security: SecurityConfig
 }
