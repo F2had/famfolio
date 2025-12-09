@@ -555,3 +555,55 @@ PORT=8080 docker compose --profile nginx up -d
 docker build -t famfolio .
 docker run -p 80:80 famfolio
 ```
+
+---
+
+## OG Image Generation
+
+Famfolio includes an automated Open Graph image generator that creates social preview images from your `config/site.config.yaml` values.
+
+### Generated Images
+
+The script creates images for all theme/locale combinations:
+
+| File                   | Theme | Locale       |
+| ---------------------- | ----- | ------------ |
+| `og-image.png`         | Light | Default (en) |
+| `og-image-dark.png`    | Dark  | Default (en) |
+| `og-image-ar.png`      | Light | Arabic       |
+| `og-image-ar-dark.png` | Dark  | Arabic       |
+
+### Usage
+
+```bash
+# Generate for default locale (both themes)
+bun run generate:og
+
+# Generate for all locales (both themes)
+bun run generate:og:all
+
+# Generate specific theme only
+bun run scripts/generate-og.ts --theme=dark
+
+# Generate specific locale only
+bun run scripts/generate-og.ts --locale=ar
+
+# Custom output directory
+bun run scripts/generate-og.ts --output=dist
+```
+
+### CLI Options
+
+| Option     | Values                  | Default  | Description                 |
+| ---------- | ----------------------- | -------- | --------------------------- |
+| `--theme`  | `light`, `dark`, `both` | `both`   | Which theme(s) to generate  |
+| `--locale` | locale code or `all`    | `en`     | Which locale(s) to generate |
+| `--output` | path                    | `public` | Output directory            |
+
+### Features
+
+- **Config-Driven**: Reads name, title, tagline, colors, and fonts from `config/site.config.yaml`
+- **Centered Layout**: Content is centered regardless of locale
+- **Theme-Aware**: Uses your exact light/dark theme colors
+- **Per-Locale Fonts**: Uses the correct font family for each language
+- **Localized Content**: Generates images with translated text for each locale
