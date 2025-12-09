@@ -75,6 +75,10 @@ export const useSettings = () => {
   const isResumeEnabled = computed(() => sections?.resume?.enabled ?? true)
   const isContactEnabled = computed(() => sections?.contact?.enabled ?? true)
   const isContactFormEnabled = computed(() => sections?.contact?.showForm ?? false)
+  const isContactEmailEnabled = computed(() => sections?.contact?.showEmail ?? true)
+  const isContactPhoneEnabled = computed(() => sections?.contact?.showPhone ?? true)
+  const isContactTelegramEnabled = computed(() => sections?.contact?.showTelegram ?? true)
+  const isContactWhatsappEnabled = computed(() => sections?.contact?.showWhatsapp ?? true)
 
   // ============================================
   // PERSONAL
@@ -97,6 +101,24 @@ export const useSettings = () => {
 
   /** Email click-to-reveal enabled */
   const isEmailClickToRevealEnabled = computed(() => security?.email?.clickToReveal ?? false)
+
+  /** Phone obfuscation enabled (mask middle digits) */
+  const isPhoneObfuscationEnabled = computed(() => security?.phone?.obfuscate ?? false)
+
+  /** Phone click-to-reveal enabled */
+  const isPhoneClickToRevealEnabled = computed(() => security?.phone?.clickToReveal ?? false)
+
+  /** Telegram obfuscation enabled (mask username/phone) */
+  const isTelegramObfuscationEnabled = computed(() => security?.telegram?.obfuscate ?? false)
+
+  /** Telegram click-to-reveal enabled */
+  const isTelegramClickToRevealEnabled = computed(() => security?.telegram?.clickToReveal ?? false)
+
+  /** WhatsApp obfuscation enabled (mask phone digits) */
+  const isWhatsappObfuscationEnabled = computed(() => security?.whatsapp?.obfuscate ?? false)
+
+  /** WhatsApp click-to-reveal enabled */
+  const isWhatsappClickToRevealEnabled = computed(() => security?.whatsapp?.clickToReveal ?? false)
 
   /** Honeypot field in contact form enabled */
   const isHoneypotEnabled = computed(() => security?.contact?.honeypot ?? false)
@@ -128,6 +150,10 @@ export const useSettings = () => {
     isResumeEnabled,
     isContactEnabled,
     isContactFormEnabled,
+    isContactEmailEnabled,
+    isContactPhoneEnabled,
+    isContactTelegramEnabled,
+    isContactWhatsappEnabled,
 
     // Personal
     isAvatarEnabled,
@@ -138,6 +164,12 @@ export const useSettings = () => {
     // Security
     isEmailObfuscationEnabled,
     isEmailClickToRevealEnabled,
+    isPhoneObfuscationEnabled,
+    isPhoneClickToRevealEnabled,
+    isTelegramObfuscationEnabled,
+    isTelegramClickToRevealEnabled,
+    isWhatsappObfuscationEnabled,
+    isWhatsappClickToRevealEnabled,
     isHoneypotEnabled,
     isNoopenerEnabled,
     isNewTabEnabled,
