@@ -11,8 +11,11 @@
   },
   "scripts": {
     "dev": "vite",
+    "dev:demo": "CONFIG_FILE=demo vite",
     "build": "run-p type-check \"build-only {@}\" -- && cp dist/index.html dist/404.html",
+    "build:demo": "CONFIG_FILE=demo run-p type-check \"build-only {@}\" -- && cp dist/index.html dist/404.html",
     "preview": "vite preview",
+    "preview:demo": "CONFIG_FILE=demo vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
     "lint:oxlint": "oxlint . --fix -D correctness --ignore-path .gitignore",
