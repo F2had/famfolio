@@ -355,19 +355,19 @@ The included nginx and Caddy configs add these security headers:
 ```yaml
 site:
   supportedLocales:
-    - code: 'fr'
-      name: 'French'
-      nativeName: 'Français'
+    - code: 'es'
+      name: 'Spanish'
+      nativeName: 'Español'
       dir: 'ltr'
 ```
 
-2. Create translation file `src/locales/fr.json`:
+2. Create translation file `src/locales/es.json`:
 
 ```json
 {
   "nav": {
-    "about": "À propos",
-    "projects": "Projets"
+    "about": "Sobre mí",
+    "projects": "Proyectos"
   }
 }
 ```
