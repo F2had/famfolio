@@ -27,6 +27,7 @@
     "ci:test": "act push --container-architecture linux/amd64",
     "ci:test:lint": "act push --container-architecture linux/amd64 -j lint-and-build",
     "ci:test:security": "act push --container-architecture linux/amd64 -j security",
+    "ci:test:lighthouse": "act push --container-architecture linux/amd64 -j lighthouse",
     "prepare": "husky"
   },
   "dependencies": {
