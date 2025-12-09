@@ -713,7 +713,7 @@ Planned features and improvements for future releases:
 - [ ] **Testimonials Section** - Display client/colleague testimonials
 - [ ] **Skills Visualization** - Interactive skill charts/graphs
 
-Want to contribute? Check out [CONTRIBUTING.md](CONTRIBUTING.md)!
+Want to contribute? Check out [CONTRIBUTING.md](docs/CONTRIBUTING.md)!
 
 ---
 
