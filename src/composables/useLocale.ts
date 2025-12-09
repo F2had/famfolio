@@ -31,14 +31,16 @@ export const useLocale = () => {
     }
   }
 
-  const toggle = () => {
+  const getNextLocale = (): LocaleCode => {
     const codes = config.site.supportedLocales.map((l) => l.code)
     const currentIndex = codes.indexOf(locale.value as LocaleCode)
     const nextIndex = (currentIndex + 1) % codes.length
-    const nextCode = codes[nextIndex]
-    if (nextCode) {
-      setLocale(nextCode)
-    }
+    return codes[nextIndex] ?? config.site.defaultLocale
+  }
+
+  const toggle = () => {
+    const nextCode = getNextLocale()
+    setLocale(nextCode)
   }
 
   watch(locale, applyLocale, { immediate: false })
@@ -55,6 +57,7 @@ export const useLocale = () => {
     isRTL,
     supportedLocales: config.site.supportedLocales,
     setLocale,
+    getNextLocale,
     toggle,
   }
 }
