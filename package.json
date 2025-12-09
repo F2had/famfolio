@@ -31,6 +31,16 @@
     "vue-router": "^4.6.3",
     "vuetify": "^3.11.2"
   },
+  "lint-staged": {
+    "*.{js,ts,vue}": [
+      "oxlint --fix -D correctness --max-warnings 1",
+      "eslint --fix --cache --max-warnings 1",
+      "prettier --write --experimental-cli"
+    ],
+    "*.{json,md,yaml,yml,scss,css}": [
+      "prettier --write --experimental-cli"
+    ]
+  },
   "devDependencies": {
     "@iconify-json/lucide": "^1.2.79",
     "@iconify-json/simple-icons": "^1.2.62",
