@@ -709,7 +709,6 @@ Planned features and improvements for future releases:
 - [ ] **PWA Support** - Offline capability and installable app
 - [ ] **Sitemap Generation** - Auto-generate sitemap.xml for SEO
 - [ ] **Blog Integration** - Markdown-based blog with frontmatter
-- [ ] **Resume Builder** - Generate PDF from config
 - [ ] **More Transition Effects** - Additional theme/locale transition options
 - [ ] **Testimonials Section** - Display client/colleague testimonials
 - [ ] **Skills Visualization** - Interactive skill charts/graphs
