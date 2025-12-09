@@ -607,3 +607,127 @@ bun run scripts/generate-og.ts --output=dist
 - **Theme-Aware**: Uses your exact light/dark theme colors
 - **Per-Locale Fonts**: Uses the correct font family for each language
 - **Localized Content**: Generates images with translated text for each locale
+
+---
+
+## Tech Stack
+
+| Category     | Technology                                                               |
+| ------------ | ------------------------------------------------------------------------ |
+| Framework    | [Vue 3](https://vuejs.org/) (Composition API)                            |
+| Build Tool   | [Vite](https://vite.dev/) (Rolldown)                                     |
+| Language     | [TypeScript](https://www.typescriptlang.org/)                            |
+| UI Framework | [Vuetify 3](https://vuetifyjs.com/)                                      |
+| Styling      | SCSS + CSS Variables                                                     |
+| i18n         | [Vue I18n](https://vue-i18n.intlify.dev/)                                |
+| Animations   | [@vueuse/motion](https://motion.vueuse.org/)                             |
+| Icons        | [Lucide](https://lucide.dev/) + [Simple Icons](https://simpleicons.org/) |
+| Fonts        | [Fontsource](https://fontsource.org/) (self-hosted)                      |
+| Config       | YAML                                                                     |
+| Runtime      | [Bun](https://bun.sh/)                                                   |
+| Linting      | [OXLint](https://oxc.rs/) + [ESLint](https://eslint.org/)                |
+| Formatting   | [Prettier](https://prettier.io/)                                         |
+
+---
+
+## CI/CD
+
+### GitHub Actions
+
+The project includes automated workflows for:
+
+| Workflow         | Trigger                   | Description                           |
+| ---------------- | ------------------------- | ------------------------------------- |
+| **CI**           | Push/PR to `master`       | Lint, auto-fix, build, security audit |
+| **Lighthouse**   | Push/PR to `master`       | Performance, accessibility, SEO audit |
+| **GitHub Pages** | Push to `master` / Manual | Build and deploy to GitHub Pages      |
+| **Docker Build** | Push to `master` / Manual | Build and push image to GHCR          |
+
+#### Choosing Configuration
+
+The **GitHub Pages** and **Docker Build** workflows support choosing which config to use:
+
+1. Go to **Actions** → select workflow
+2. Click **Run workflow**
+3. Choose config:
+   - Empty (default) → uses `config/site.config.yaml`
+   - `demo` → uses `config/site.config.demo.yaml`
+
+On push to `master`, workflows use the default config. Manual runs let you choose.
+
+#### Docker Image
+
+Images are automatically built and pushed to GitHub Container Registry on every push to `master`:
+
+```bash
+# Pull the latest image
+docker pull ghcr.io/f2had/famfolio:latest
+
+# Or a specific commit
+docker pull ghcr.io/f2had/famfolio:abc1234
+```
+
+### Testing CI Locally with act
+
+You can test GitHub Actions locally using [act](https://github.com/nektos/act):
+
+```bash
+
+# For installation instructions, see: https://nektosact.com/installation/index.html
+
+# Run all CI jobs
+bun run ci:test
+
+# Run specific job
+bun run ci:test:lint      # Lint, format check & build
+bun run ci:test:security  # Security audit
+```
+
+> **Note**: On Apple Silicon (M1/M2/M3), the scripts use `--container-architecture linux/amd64` for compatibility.
+
+### Pre-commit Hooks
+
+[Husky](https://typicode.github.io/husky/) + [lint-staged](https://github.com/lint-staged/lint-staged) automatically run on every commit:
+
+- **JS/TS/Vue files**: OXLint → ESLint → Prettier
+- **JSON/MD/YAML/SCSS/CSS**: Prettier
+
+Commits will fail if linting errors are found (`--max-warnings 1`).
+
+---
+
+## Contributing
+
+Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+---
+
+## Roadmap
+
+Planned features and improvements for future releases:
+
+- [ ] **PWA Support** - Offline capability and installable app
+- [ ] **Sitemap Generation** - Auto-generate sitemap.xml for SEO
+- [ ] **Blog Integration** - Markdown-based blog with frontmatter
+- [ ] **Resume Builder** - Generate PDF from config
+- [ ] **More Transition Effects** - Additional theme/locale transition options
+- [ ] **Testimonials Section** - Display client/colleague testimonials
+- [ ] **Skills Visualization** - Interactive skill charts/graphs
+
+Want to contribute? Check out [CONTRIBUTING.md](CONTRIBUTING.md)!
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+<div align="center">
+
+**[⬆ Back to Top](#famfolio)**
+
+Made with Vue 3 + TypeScript
+
+</div>
