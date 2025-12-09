@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Cache dependencies
         uses: actions/cache@v4
@@ -28,14 +30,33 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Run OXLint
-        run: bunx oxlint . -D correctness --max-warnings 1 --ignore-path .gitignore
+      - name: Run OXLint (auto-fix)
+        run: bunx oxlint . --fix -D correctness --ignore-path .gitignore
 
-      - name: Run ESLint
-        run: bunx eslint . --max-warnings 1
+      - name: Run ESLint (auto-fix)
+        run: bunx eslint . --fix --cache
 
-      - name: Check formatting
-        run: bunx prettier --check src/
+      - name: Format code
+        run: bunx prettier --write src/
+
+      - name: Check for changes
+        id: changes
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit fixes
+        if: steps.changes.outputs.has_changes == 'true' && github.event_name == 'push'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "style: auto-fix linting and formatting"
+          git push
 
       - name: Build
         run: bun run build-only
