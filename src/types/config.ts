@@ -39,6 +39,9 @@ export type PersonalInfo = {
   title: LocalizedString
   tagline: LocalizedString
   email: string
+  phone?: string
+  telegram?: string
+  whatsapp?: string
   location: LocalizedString
   avatar: {
     enabled: boolean
@@ -64,6 +67,10 @@ export type SectionsConfig = {
   contact: {
     enabled: boolean
     showForm: boolean
+    showEmail?: boolean
+    showPhone?: boolean
+    showTelegram?: boolean
+    showWhatsapp?: boolean
   }
 }
 
@@ -142,7 +149,6 @@ export type AnimationsConfig = {
   enabled: boolean
   respectReducedMotion: boolean
   hero: {
-    cursorFollow: boolean
     toy: boolean
   }
   scrollReveal: boolean
@@ -159,6 +165,21 @@ export type EmailSecurityConfig = {
   clickToReveal: boolean
 }
 
+export type PhoneSecurityConfig = {
+  obfuscate: boolean
+  clickToReveal: boolean
+}
+
+export type TelegramSecurityConfig = {
+  obfuscate: boolean
+  clickToReveal: boolean
+}
+
+export type WhatsappSecurityConfig = {
+  obfuscate: boolean
+  clickToReveal: boolean
+}
+
 export type ContactSecurityConfig = {
   honeypot: boolean
 }
@@ -170,6 +191,9 @@ export type ExternalLinksSecurityConfig = {
 
 export type SecurityConfig = {
   email: EmailSecurityConfig
+  phone: PhoneSecurityConfig
+  telegram?: TelegramSecurityConfig
+  whatsapp?: WhatsappSecurityConfig
   contact: ContactSecurityConfig
   externalLinks: ExternalLinksSecurityConfig
 }
