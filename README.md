@@ -1,48 +1,429 @@
-# famfolio
+<div align="center">
 
-This template should help get you started developing with Vue 3 in Vite.
+# Famfolio
 
-## Recommended IDE Setup
+**A modern, configurable portfolio template with full RTL support and delightful animations.**
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![CI](https://github.com/F2had/famfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/F2had/famfolio/actions/workflows/ci.yml)
+[![Lighthouse](https://github.com/F2had/famfolio/actions/workflows/lighthouse.yml/badge.svg)](https://github.com/F2had/famfolio/actions/workflows/lighthouse.yml)
+[![GitHub stars](https://img.shields.io/github/stars/F2had/famfolio)](https://github.com/F2had/famfolio/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/F2had/famfolio)](https://github.com/F2had/famfolio/network/members)
+[![GitHub issues](https://img.shields.io/github/issues/F2had/famfolio)](https://github.com/F2had/famfolio/issues)
+[![GitHub last commit](https://img.shields.io/github/last-commit/F2had/famfolio)](https://github.com/F2had/famfolio/commits/master)
 
-## Recommended Browser Setup
+[![Node](https://img.shields.io/badge/Node-20%2B-green.svg)](https://nodejs.org/)
+[![Bun](https://img.shields.io/badge/Bun-1.0%2B-f472b6.svg)](https://bun.sh/)
+[![Vue](https://img.shields.io/badge/Vue-3.5-42b883.svg)](https://vuejs.org/)
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+[Demo](https://f2had.github.io/famfolio) · [Documentation](#configuration)
 
-## Type Support for `.vue` Imports in TS
+ <!-- · [العربية](docs/README.ar.md) -->
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+</div>
 
-## Customize configuration
+---
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+## Features
 
-## Project Setup
+- **Single Configuration File** - Everything controlled via `config/site.config.yaml`
+- **Full RTL Support** - Arabic and other RTL languages with automatic layout mirroring
+- **Per-Locale Fonts** - Different font families for each language (e.g., Outfit for English, Tajawal for Arabic)
+- **Dark/Light Themes** - System-aware with smooth animated transitions
+- **Animated Transitions** - Mascot-driven theme switch, page flip locale change
+- **Interactive Mascot** - Playful blob character that follows your cursor
+- **Kinetic Typography** - Letter-by-letter animations (LTR) or word animations (RTL)
+- **Self-Hosted Fonts** - No external dependencies (Fontsource)
+- **Accessibility** - Respects `prefers-reduced-motion`, keyboard navigation, ARIA labels
+- **OG Image Generation** - Auto-generate social images for all themes/locales
+- **Security Features** - Email obfuscation, honeypot spam protection, CSP headers, secure external links
 
-```sh
-bun install
+---
+
+## Quick Start
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) 20+ or 22+
+- [Bun](https://bun.sh/) 1.0+ (recommended) or npm/pnpm
+
+### Installation
+
+```bash
+git clone https://github.com/F2had/famfolio.git  # HTTPS
+git clone git@github.com:F2had/famfolio.git      # SSH (requires keys)
+
+cd famfolio
+bun install  # Install dependencies
+bun dev      # Start development server
 ```
 
-### Compile and Hot-Reload for Development
+### Configure Your Portfolio
 
-```sh
-bun dev
+Edit `config/site.config.yaml`:
+
+```yaml
+personal:
+  name:
+    en: 'Your Name'
+    ar: 'اسمك'
+  title:
+    en: 'Software Engineer'
+    ar: 'مهندس برمجيات'
 ```
 
-### Type-Check, Compile and Minify for Production
+### Build for Production
 
-```sh
+```bash
 bun run build
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+Output will be in the `dist/` folder, ready for static hosting.
 
-```sh
-bun lint
+---
+
+## Use as Template
+
+Famfolio is designed to be used as a template for your own portfolio. Here's how to create your own and keep it updated with new features.
+
+### Option 1: GitHub Template (Recommended)
+
+1. Click **"Use this template"** → **"Create a new repository"** on GitHub
+2. Clone your new repository
+3. Edit `config/site.config.yaml` with your information
+4. Push and deploy!
+
+### Option 2: Fork
+
+1. **Fork** this repository on GitHub
+2. Clone your fork:
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/famfolio.git portfolio
+   cd portfolio
+   ```
+3. Edit `config/site.config.yaml` and customize as needed
+4. Push to your repository
+
+### Syncing Updates from Template
+
+To get new features, bug fixes, and improvements from the original template:
+
+```bash
+# Add the original repo as a remote (only once)
+git remote add template https://github.com/ORIGINAL_OWNER/famfolio.git
+
+# Fetch and merge updates
+git fetch template
+git merge template/master --allow-unrelated-histories
+
+# Resolve any conflicts, then push
+git push
+```
+
+**Tips for smooth updates:**
+
+- Keep your customizations organized (fonts in one commit, config in another)
+- The main conflict areas are `config/site.config.yaml` and custom fonts/styles
+- Review the template's changelog before merging major updates
+
+### What You'll Typically Customize
+
+| File/Folder                          | What to Change                                 |
+| ------------------------------------ | ---------------------------------------------- |
+| `config/site.config.yaml`            | All your personal info, projects, colors, etc. |
+| `src/locales/*.json`                 | UI text if adding new languages                |
+| `src/assets/styles/_typography.scss` | If adding custom fonts                         |
+| `public/`                            | Your images, resume PDF, favicon               |
+
+---
+
+## Configuration
+
+All configuration is in `config/site.config.yaml`. Here's the complete reference:
+
+### Site Metadata
+
+```yaml
+site:
+  title: 'Your Name | Software Engineer' # Browser tab title
+  description: 'Portfolio description' # Meta description for SEO
+  url: 'https://yoursite.dev' # Production URL
+  defaultLocale: 'en' # Initial language
+  supportedLocales:
+    - code: 'en'
+      name: 'English'
+      nativeName: 'English'
+      dir: 'ltr'
+    - code: 'ar'
+      name: 'Arabic'
+      nativeName: 'العربية'
+      dir: 'rtl' # Right-to-left
+```
+
+### Personal Information
+
+All text fields support localization:
+
+```yaml
+personal:
+  name:
+    en: 'Jane'
+    ar: 'جين'
+  lastName:
+    en: 'Doe'
+    ar: 'دو'
+  title:
+    en: 'Software Engineer'
+    ar: 'مهندسة برمجيات'
+  tagline:
+    en: 'Building things that matter.'
+    ar: 'أبني أشياء ذات قيمة.'
+  email: 'hello@example.com'
+  location:
+    en: 'Mecca, Saudi Arabia'
+    ar: 'مكة المكرمة'
+  avatar:
+    enabled: false # Show/hide avatar
+    src: '/images/avatar.jpg' # Path in public folder
+```
+
+### Social Links
+
+```yaml
+socials:
+  - platform: 'github'
+    url: 'https://github.com/username'
+    icon: 'github' # Lucide icon name
+  - platform: 'linkedin'
+    url: 'https://linkedin.com/in/username'
+    icon: 'linkedin'
+  - platform: 'twitter'
+    url: 'https://twitter.com/username'
+    icon: 'twitter'
+  - platform: 'email'
+    url: 'mailto:hello@example.com'
+    icon: 'mail'
+  - platform: 'telegram'
+    url: 'https://t.me/username' # Or https://t.me/+1234567890 for phone
+    icon: 'telegram'
+  - platform: 'whatsapp'
+    url: 'https://wa.me/1234567890' # Phone number without + or spaces
+    icon: 'whatsapp'
+```
+
+### Sections Toggle
+
+Enable or disable any section:
+
+```yaml
+sections:
+  hero:
+    enabled: true
+  about:
+    enabled: true
+  projects:
+    enabled: true
+  blog:
+    enabled: false # Disabled by default
+  resume:
+    enabled: true
+    pdfPath: '/resume.pdf' # Path in public folder
+  contact:
+    enabled: true
+    showForm: false # Show form or just info
+```
+
+### Projects
+
+```yaml
+defaults:
+  codeForge: 'https://github.com/username' # Base URL for repos
+
+projects:
+  - id: 'project-1'
+    title:
+      en: 'Project Name'
+      ar: 'اسم المشروع'
+    description:
+      en: 'Project description here.'
+      ar: 'وصف المشروع هنا.'
+    image: 'https://example.com/image.jpg'
+    tech:
+      - 'Vue'
+      - 'TypeScript'
+    links:
+      live: 'https://project.dev'
+      repo: 'project-name' # Appends to defaults.codeForge
+    featured: true
+
+  - id: 'project-2'
+    # ... same structure
+    links:
+      code: 'https://gitlab.com/user/repo' # Full URL (overrides default)
+```
+
+### Theme Colors
+
+```yaml
+theme:
+  defaultMode: 'system' # "light", "dark", or "system"
+  colors:
+    light:
+      bgPrimary: '#FFFDF9'
+      bgSecondary: '#F7F4EE'
+      textPrimary: '#2D2926'
+      textSecondary: '#6B635A'
+      accent: '#C8873D'
+      accentHover: '#A66E2C'
+      accentSubtle: '#FDF6ED'
+      border: '#E8E4DC'
+    dark:
+      bgPrimary: '#1A1816'
+      bgSecondary: '#252220'
+      textPrimary: '#F5F2ED'
+      textSecondary: '#A69E94'
+      accent: '#E9A54D'
+      accentHover: '#F0B865'
+      accentSubtle: '#2E2519'
+      border: '#3A3632'
+```
+
+### Typography (Per-Locale Fonts)
+
+```yaml
+typography:
+  fonts:
+    en:
+      display: 'Outfit' # Headings
+      body: 'Source Sans 3' # Body text
+    ar:
+      display: 'Tajawal' # Arabic headings
+      body: 'IBM Plex Sans Arabic' # Arabic body
+```
+
+### Animations
+
+```yaml
+animations:
+  enabled: true # Master switch
+  respectReducedMotion: true # Honor browser preference
+  hero:
+    toy: true # Mascot character
+  scrollReveal: true
+  hoverEffects: true
+  transitions:
+    theme:
+      enabled: true # Mascot + ripple effect
+    locale:
+      enabled: true
+      directionChange: 'pageFlip' # "pageFlip" or "cardFlip"
+      sameDirection: 'fade' # "ripple" or "fade"
+```
+
+### Security
+
+```yaml
+security:
+  email:
+    obfuscate: true # Display as "hello [at] example [dot] com"
+    clickToReveal: true # Require click to show real email
+  contact:
+    honeypot: true # Hidden field to catch spam bots
+  externalLinks:
+    noopener: true # Add rel="noopener noreferrer"
+    newTab: true # Open in new tab (_blank)
+```
+
+**Server-Side Headers** (Docker deployments):
+
+The included nginx and Caddy configs add these security headers:
+
+- Content-Security-Policy (CSP)
+- X-Frame-Options
+- X-Content-Type-Options
+- Referrer-Policy
+- Permissions-Policy
+
+---
+
+## Customization
+
+### Adding a New Language
+
+1. Add the locale to `config/site.config.yaml`:
+
+```yaml
+site:
+  supportedLocales:
+    - code: 'fr'
+      name: 'French'
+      nativeName: 'Français'
+      dir: 'ltr'
+```
+
+2. Create translation file `src/locales/fr.json`:
+
+```json
+{
+  "nav": {
+    "about": "À propos",
+    "projects": "Projets"
+  }
+}
+```
+
+3. Add localized content in config:
+
+```yaml
+personal:
+  name:
+    en: 'Jane'
+    es: 'Juan'
+```
+
+4. (Optional) Add fonts for the new locale in `typography.fonts`.
+
+### Adding Custom Fonts
+
+1. Install from Fontsource:
+
+```bash
+bun add @fontsource/your-font
+```
+
+2. Import in `src/assets/styles/_typography.scss`:
+
+```scss
+@import '@fontsource/your-font/400.css';
+@import '@fontsource/your-font/700.css';
+```
+
+3. Update `config/site.config.yaml`:
+
+```yaml
+typography:
+  fonts:
+    en:
+      display: 'Your Font'
+```
+
+### Disabling Animations
+
+Set the master switch to disable all animations:
+
+```yaml
+animations:
+  enabled: false
+```
+
+Or disable specific features:
+
+```yaml
+animations:
+  enabled: true
+  hero:
+    toy: false # Disable mascot only
+  transitions:
+    theme:
+      enabled: false # Disable theme transition effect
 ```
