@@ -29,7 +29,9 @@ body {
   min-height: 100vh;
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  transition: background-color var(--transition-theme), color var(--transition-theme);
+  transition:
+    background-color var(--transition-theme),
+    color var(--transition-theme);
 }
 
 // -----------------------------------------------------------------------------
