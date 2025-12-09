@@ -98,7 +98,7 @@ Famfolio is designed to be used as a template for your own portfolio. Here's how
 1. **Fork** this repository on GitHub
 2. Clone your fork:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/famfolio.git portfolio
+   git clone https://github.com/F2had/famfolio.git portfolio
    cd portfolio
    ```
 3. Edit `config/site.config.yaml` and customize as needed
@@ -110,7 +110,7 @@ To get new features, bug fixes, and improvements from the original template:
 
 ```bash
 # Add the original repo as a remote (only once)
-git remote add template https://github.com/ORIGINAL_OWNER/famfolio.git
+git remote add template https://github.com/F2had/famfolio.git
 
 # Fetch and merge updates
 git fetch template
@@ -427,3 +427,60 @@ animations:
     theme:
       enabled: false # Disable theme transition effect
 ```
+
+---
+
+## Development
+
+### Available Scripts
+
+```bash
+bun dev                      # Start development server
+bun dev:demo                 # Start dev server with demo config
+bun run build                # Type-check and build for production
+bun run build:demo           # Build with demo config
+bun run preview              # Preview production build locally
+bun run type-check           # Run TypeScript type checking
+bun run lint                 # Run all linters (oxlint + eslint)
+bun run format               # Format code with Prettier
+bun run lighthouse           # Run Lighthouse audit locally
+bun run generate:og          # Generate OG images (default locale)
+bun run generate:og:all      # Generate OG images for all locales
+bun run ci:test              # Test all CI jobs locally with act
+bun run ci:test:lint         # Test lint & build job only
+bun run ci:test:security     # Test security audit job only
+bun run ci:test:lighthouse   # Test Lighthouse CI job only
+```
+
+### Project Structure
+
+```
+famfolio/
+├── src/
+│   ├── assets/styles/      # SCSS (variables, typography, animations)
+│   ├── components/
+│   │   ├── common/         # Reusable (BaseButton, ProjectCard, etc.)
+│   │   ├── layout/         # Navigation, Footer, SectionWrapper
+│   │   ├── sections/       # Hero, About, Projects, Contact, etc.
+│   │   └── transitions/    # Theme and Locale transition effects
+│   ├── composables/        # Vue composables (useTheme, useLocale, etc.)
+│   ├── locales/            # Translation files (en.json, ar.json)
+│   ├── plugins/            # Vuetify and i18n setup
+│   ├── pages/              # Page components
+│   └── types/              # TypeScript definitions
+├── public/                 # Static assets (images, resume.pdf)
+├── scripts/                # Build scripts (OG image generator)
+├── config/                 # Configuration files
+│   ├── site.config.yaml    # Main configuration
+│   └── site.config.demo.yaml # Demo configuration
+```
+
+### Key Composables
+
+| Composable          | Purpose                                  |
+| ------------------- | ---------------------------------------- |
+| `useTheme`          | Dark/light mode state and toggle         |
+| `useLocale`         | Language and RTL direction management    |
+| `useConfig`         | Access to config/site.config.yaml values |
+| `useSettings`       | Computed feature flags from config       |
+| `useLocalizedValue` | Helper for localized strings             |
