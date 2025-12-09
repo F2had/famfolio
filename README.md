@@ -484,3 +484,74 @@ famfolio/
 | `useConfig`         | Access to config/site.config.yaml values |
 | `useSettings`       | Computed feature flags from config       |
 | `useLocalizedValue` | Helper for localized strings             |
+
+---
+
+## Deployment
+
+### GitHub Pages
+
+The easiest way to deploy your portfolio:
+
+1. Go to your repository **Settings** → **Pages**
+2. Under "Build and deployment", select **GitHub Actions**
+3. Push to `master` branch - the workflow will build and deploy automatically
+
+Your site will be available at `https://YOUR_USERNAME.github.io/REPO_NAME/`
+
+```sh
+e.g. https://F2had.github.io/famfolio/
+```
+
+> **Note**: The build automatically sets the correct base URL for GitHub Pages subpath hosting.
+
+### Cloudflare Pages
+
+1. Push your code to GitHub/GitLab
+
+2. In Cloudflare Dashboard, go to **Workers & Pages** → **Create application** → **Pages**
+
+3. Connect your repository
+
+4. Configure build settings:
+   - **Build command:** `bun run build`
+   - **Build output directory:** `dist`
+   - **Root directory:** `/` (or your project path)
+
+5. Add environment variable (optional):
+   - `NODE_VERSION`: `20`
+
+6. Deploy!
+
+Your site will be available at `https://your-project.pages.dev`
+
+### Docker
+
+Three profiles are available:
+
+| Profile | Server | SSL        | Use Case              |
+| ------- | ------ | ---------- | --------------------- |
+| `nginx` | Nginx  | No         | Simple static hosting |
+| `ssl`   | Caddy  | Yes (auto) | Production with HTTPS |
+| `dev`   | Vite   | No         | Development with HMR  |
+
+```bash
+# Production with nginx
+docker compose --profile nginx up -d
+
+# Production with Caddy + automatic SSL
+DOMAIN=yourdomain.com docker compose --profile ssl up -d
+
+# Development with hot reload
+docker compose --profile dev up dev
+
+# Custom port for nginx (default: 80)
+PORT=8080 docker compose --profile nginx up -d
+```
+
+#### Manual Build
+
+```bash
+docker build -t famfolio .
+docker run -p 80:80 famfolio
+```
