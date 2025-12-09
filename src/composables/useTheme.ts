@@ -7,6 +7,18 @@ type ThemeMode = 'light' | 'dark' | 'system'
 const mode = ref<ThemeMode>(config.theme.defaultMode)
 const storageKey = 'famfolio-theme'
 
+// Map config color keys to CSS variable names
+const colorVarMap: Record<string, string> = {
+  bgPrimary: '--bg-primary',
+  bgSecondary: '--bg-secondary',
+  textPrimary: '--text-primary',
+  textSecondary: '--text-secondary',
+  accent: '--accent',
+  accentHover: '--accent-hover',
+  accentSubtle: '--accent-subtle',
+  border: '--border',
+}
+
 export const useTheme = () => {
   const prefersDark = usePreferredDark()
   const stored = useStorage<ThemeMode>(storageKey, config.theme.defaultMode)
@@ -25,6 +37,17 @@ export const useTheme = () => {
     root.dataset.theme = resolved.value
     root.classList.remove('light', 'dark')
     root.classList.add(resolved.value)
+
+    // Apply colors from config to CSS variables
+    const colors = config.theme.colors[resolved.value]
+    if (colors) {
+      for (const [key, varName] of Object.entries(colorVarMap)) {
+        const value = colors[key as keyof typeof colors]
+        if (value) {
+          root.style.setProperty(varName, value)
+        }
+      }
+    }
   }
 
   const setMode = (newMode: ThemeMode) => {
