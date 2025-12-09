@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  lint-and-build:
+    name: Lint, Format & Build
+    runs-on: ubuntu-latest
+    container:
+      image: oven/bun:latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Run OXLint
+        run: bunx oxlint . -D correctness --max-warnings 1 --ignore-path .gitignore
+
+      - name: Run ESLint
+        run: bunx eslint . --max-warnings 1
+
+      - name: Check formatting
+        run: bunx prettier --check src/
+
+      - name: Build
+        run: bun run build-only
+
+  security:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    container:
+      image: oven/bun:latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Audit dependencies
+        run: bun audit --level moderate || echo "::warning::Vulnerabilities found, review bun audit output"

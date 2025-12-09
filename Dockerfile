@@ -3,6 +3,9 @@ FROM oven/bun:1.3 AS builder
 
 WORKDIR /app
 
+# Build args
+ARG CONFIG_FILE=""
+
 # Copy package files
 COPY package.json bun.lock* ./
 
@@ -13,6 +16,7 @@ RUN bun install --frozen-lockfile
 COPY . .
 
 # Build the application (type-check runs in CI, skip in Docker for faster builds)
+ENV CONFIG_FILE=${CONFIG_FILE}
 RUN bun run build-only
 
 # Production stage
