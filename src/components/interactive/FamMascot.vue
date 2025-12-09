@@ -156,19 +156,19 @@ const hideFam = async () => {
   setAnim({ x: offsetX, y: offsetY, scale: 1, opacity: 1 })
 
   // Wait for spring animation to reach center
-  await new Promise(resolve => setTimeout(resolve, 400))
+  await new Promise((resolve) => setTimeout(resolve, 400))
 
   // Now show sad face after reaching center
   isSad.value = true
 
   // Let user see the sad expression
-  await new Promise(resolve => setTimeout(resolve, 600))
+  await new Promise((resolve) => setTimeout(resolve, 600))
 
   // Fade out slowly
   setAnim({ x: offsetX, y: offsetY, scale: 0.7, opacity: 0 })
 
   // Wait for fade
-  await new Promise(resolve => setTimeout(resolve, 500))
+  await new Promise((resolve) => setTimeout(resolve, 500))
 
   // Reset state
   isVisible.value = false
@@ -180,7 +180,7 @@ const hideFam = async () => {
 // Wake up animation (for intro)
 const wakeUp = async () => {
   isWakingUp.value = true
-  await new Promise(resolve => setTimeout(resolve, 1200))
+  await new Promise((resolve) => setTimeout(resolve, 1200))
   isWakingUp.value = false
 }
 
@@ -407,69 +407,159 @@ onUnmounted(() => {
 
 // Animations
 @keyframes famWobble {
-  0%, 100% { transform: rotate(0deg) scale(1); }
-  25% { transform: rotate(5deg) scale(1.05); }
-  50% { transform: rotate(0deg) scale(0.95); }
-  75% { transform: rotate(-5deg) scale(1.05); }
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(5deg) scale(1.05);
+  }
+  50% {
+    transform: rotate(0deg) scale(0.95);
+  }
+  75% {
+    transform: rotate(-5deg) scale(1.05);
+  }
 }
 
 @keyframes famBlink {
-  0%, 45%, 55%, 100% { transform: scaleY(1); }
-  50% { transform: scaleY(0.1); }
+  0%,
+  45%,
+  55%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.1);
+  }
 }
 
 @keyframes famPulse {
-  0%, 100% { opacity: 0.15; transform: scale(1); }
-  50% { opacity: 0.25; transform: scale(1.2); }
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.25;
+    transform: scale(1.2);
+  }
 }
 
 @keyframes famShake {
-  0%, 100% { transform: translateX(0) rotate(0deg); }
-  20% { transform: translateX(-3px) rotate(-5deg); }
-  40% { transform: translateX(3px) rotate(5deg); }
-  60% { transform: translateX(-2px) rotate(-3deg); }
-  80% { transform: translateX(2px) rotate(3deg); }
+  0%,
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+  20% {
+    transform: translateX(-3px) rotate(-5deg);
+  }
+  40% {
+    transform: translateX(3px) rotate(5deg);
+  }
+  60% {
+    transform: translateX(-2px) rotate(-3deg);
+  }
+  80% {
+    transform: translateX(2px) rotate(3deg);
+  }
 }
 
 @keyframes famSadShake {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(-5deg); }
-  75% { transform: rotate(5deg); }
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
 }
 
 @keyframes famWakeUp {
-  0% { transform: scale(0) rotate(-180deg); opacity: 0; }
-  60% { transform: scale(1.2) rotate(10deg); opacity: 1; }
-  80% { transform: scale(0.9) rotate(-5deg); }
-  100% { transform: scale(1) rotate(0deg); }
+  0% {
+    transform: scale(0) rotate(-180deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2) rotate(10deg);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(0.9) rotate(-5deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
 }
 
 @keyframes famWakeUpBlink {
-  0% { transform: scaleY(0.1); }
-  15% { transform: scaleY(1); }
-  25% { transform: scaleY(1); }
-  30% { transform: scaleY(0.1); }
-  40% { transform: scaleY(1); }
-  55% { transform: scaleY(1); }
-  60% { transform: scaleY(0.1); }
-  70% { transform: scaleY(1); }
-  100% { transform: scaleY(1); }
+  0% {
+    transform: scaleY(0.1);
+  }
+  15% {
+    transform: scaleY(1);
+  }
+  25% {
+    transform: scaleY(1);
+  }
+  30% {
+    transform: scaleY(0.1);
+  }
+  40% {
+    transform: scaleY(1);
+  }
+  55% {
+    transform: scaleY(1);
+  }
+  60% {
+    transform: scaleY(0.1);
+  }
+  70% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(1);
+  }
 }
 
 @keyframes famWakeUpGlow {
-  0% { opacity: 0; transform: scale(0.5); }
-  30% { opacity: 0.5; transform: scale(2); }
-  100% { opacity: 0.15; transform: scale(1); }
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  30% {
+    opacity: 0.5;
+    transform: scale(2);
+  }
+  100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
 }
 
 @keyframes eyebrowsAppear {
-  0% { opacity: 0; transform: translateX(-50%) translateY(5px); }
-  100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 }
 
 @keyframes exhaustedAppear {
-  0% { opacity: 0; transform: translateX(-50%) translateY(5px); }
-  100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 }
 
 // Reduced motion

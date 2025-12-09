@@ -18,7 +18,8 @@ const emit = defineEmits<{
 
 const { t } = useI18n()
 const { site } = useConfig()
-const { isAboutEnabled, isProjectsEnabled, isBlogEnabled, isContactEnabled, isToyEnabled } = useSettings()
+const { isAboutEnabled, isProjectsEnabled, isBlogEnabled, isContactEnabled, isToyEnabled } =
+  useSettings()
 
 const logoConfig = computed(() => site.logo)
 

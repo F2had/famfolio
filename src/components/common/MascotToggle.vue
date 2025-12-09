@@ -12,16 +12,13 @@ const { t } = useI18n()
 const { isMascotVisible, toggleMascot } = useMascotState()
 
 const icon = computed(() => (isMascotVisible.value ? IconEye : IconEyeOff))
-const label = computed(() => (isMascotVisible.value ? t('mascotToggle.hideFam') : t('mascotToggle.showFam')))
+const label = computed(() =>
+  isMascotVisible.value ? t('mascotToggle.hideFam') : t('mascotToggle.showFam'),
+)
 </script>
 
 <template>
-  <button
-    class="mascot-toggle"
-    :aria-label="label"
-    :title="label"
-    @click="toggleMascot"
-  >
+  <button class="mascot-toggle" :aria-label="label" :title="label" @click="toggleMascot">
     <component :is="icon" class="mascot-toggle__icon" />
   </button>
 </template>

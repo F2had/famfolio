@@ -220,8 +220,8 @@ const copyButtonStyle = computed(() => ({
   align-items: center;
   gap: var(--space-sm);
   padding: var(--space-sm) var(--space-md);
-  font-family: ui-monospace, 'SF Mono', 'Cascadia Code', 'Source Code Pro', Menlo, Consolas,
-    monospace;
+  font-family:
+    ui-monospace, 'SF Mono', 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
   font-size: var(--text-sm);
   background-color: var(--bg-secondary);
   border: 1px solid var(--border);
