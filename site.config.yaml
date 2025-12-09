@@ -1,57 +1,77 @@
 # ============================================
 # SITE METADATA
+# Basic information about the site
 # ============================================
 site:
-  title: "Your Name | Software Engineer"
-  description: "Personal portfolio showcasing my work and skills."
-  url: "https://yoursite.dev"
-  defaultLocale: "en"
-  supportedLocales:
+  title: "John Doe | Software Engineer"          # Browser tab title and SEO title
+  description: "Personal portfolio showcasing my work and skills."  # Meta description for SEO
+  url: "https://yoursite.dev"                     # Production URL (used for og:url and canonical)
+  favicon:                                        # Favicon configuration
+    svg: "/favicon.svg"                           # SVG favicon (modern browsers)
+  logo:                                           # Logo for navigation (optional)
+    enabled: false                                # Show logo instead of name in nav
+    src: "/logo.svg"                              # Path to logo file
+    alt: "Site Logo"                              # Alt text for accessibility
+  defaultLocale: "en"                             # Initial language on first visit
+  supportedLocales:                               # Available languages for the site
     - code: "en"
       name: "English"
       nativeName: "English"
-      dir: "ltr"
+      dir: "ltr"                                  # Text direction: ltr or rtl
     - code: "ar"
       name: "Arabic"
       nativeName: "العربية"
       dir: "rtl"
 
 # ============================================
+# DEFAULTS
+# Reduce repetition - set once, use everywhere
+# ============================================
+defaults:
+  codeForge: "https://github.com/janedoe"         # Base URL for your repos (projects use "repo" to append)
+
+# ============================================
 # PERSONAL INFO
+# Supports localized values using language codes as keys
 # ============================================
 personal:
-  name:
+  name:                                           # First name (localized)
     en: "Jane"
     ar: "محمد"
-  lastName:
+  lastName:                                       # Last name (localized)
     en: "Doe"
     ar: "أحمد"
-  title:
+  title:                                          # Job title/role (localized)
     en: "Software Engineer"
     ar: "مهندس برمجيات"
-  tagline:
+  tagline:                                        # Brief tagline shown in hero (localized)
     en: "Building things that matter."
     ar: "أبني أشياء ذات قيمة."
-  email: "hello@example.com"
-  location:
+  email: "hello@example.com"                      # Contact email (used in footer/contact)
+  phone: "+1234567890"                            # Contact phone (optional, used in contact section)
+  telegram: "@janedoe"                            # Telegram username (@user) or phone (+1234567890)
+  whatsapp: "+1234567890"                         # WhatsApp phone number (with country code)
+  location:                                       # Location shown in contact section (localized)
     en: "Mecca, Saudi Arabia"
     ar: "مكة المكرمة"
-  avatar:
-    enabled: false
-    src: "/images/avatar.jpg"
+  avatar:                                         # Profile photo settings
+    enabled: false                                # Show/hide avatar in hero section
+    src: "/images/avatar.jpg"                     # Path relative to public folder
 
 # ============================================
 # SOCIAL LINKS
+# Icons use Lucide (lucide.dev) or Simple Icons (simpleicons.org)
+# Examples: github, linkedin, twitter, mail, bluesky, mastodon, etc.
 # ============================================
 socials:
   - platform: "github"
-    url: "https://github.com"
+    url: "https://github.com/janedoe"
     icon: "github"
   - platform: "linkedin"
-    url: "https://linkedin.com"
+    url: "https://linkedin.com/in/janedoe"
     icon: "linkedin"
   - platform: "twitter"
-    url: "https://twitter.com"
+    url: "https://twitter.com/janedoe"
     icon: "twitter"
   - platform: "email"
     url: "mailto:hello@example.com"
@@ -59,25 +79,32 @@ socials:
 
 # ============================================
 # NAVIGATION & SECTIONS
+# Toggle visibility of each section
+# Disabled sections won't render and won't appear in navigation
 # ============================================
 sections:
   hero:
-    enabled: true
+    enabled: true                                 # Landing section with name and tagline
   about:
-    enabled: true
+    enabled: true                                 # Bio and skills section
   projects:
-    enabled: true
+    enabled: true                                 # Portfolio projects grid
   blog:
-    enabled: false
+    enabled: true                                # Blog posts list (external links)
   resume:
-    enabled: true
-    pdfPath: "/resume.pdf"
+    enabled: true                                 # Resume download section
+    pdfPath: "/resume.pdf"                        # Path to resume PDF in public folder
   contact:
-    enabled: true
-    showForm: false
+    enabled: true                                 # Contact information section
+    showForm: true                               # Show contact form (uses mailto fallback)
+    showEmail: true                              # Show email in contact cards
+    showPhone: true                              # Show phone in contact cards
+    showTelegram: true                           # Show Telegram in contact cards
+    showWhatsapp: true                           # Show WhatsApp in contact cards
 
 # ============================================
 # ABOUT SECTION
+# Supports markdown-style line breaks with |
 # ============================================
 about:
   content:
@@ -96,6 +123,7 @@ about:
 
 # ============================================
 # SKILLS
+# List of skills shown as tags in About section
 # ============================================
 skills:
   - "Vue"
@@ -105,6 +133,8 @@ skills:
 
 # ============================================
 # PROJECTS
+# Use "repo" for default forge (appends to defaults.codeForge)
+# Use "code" for full URL (overrides default forge)
 # ============================================
 projects:
   - id: "project-1"
@@ -114,14 +144,14 @@ projects:
     description:
       en: "A brief description of what this project does and why it matters."
       ar: "وصف موجز لما يفعله هذا المشروع ولماذا هو مهم."
-    image: "https://picsum.photos/seed/alpha/800/600"
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop"
     tech:
       - "Vue"
       - "Node.js"
       - "PostgreSQL"
     links:
-      live: "https://example.com"
-      code: "https://github.com/example/project-alpha"
+      live: "https://project-alpha.dev"
+      repo: "project-alpha"                       # Uses defaults.codeForge + /project-alpha
     featured: true
 
   - id: "project-2"
@@ -131,14 +161,14 @@ projects:
     description:
       en: "Another amazing project with a compelling description."
       ar: "مشروع رائع آخر مع وصف مقنع."
-    image: "https://picsum.photos/seed/beta/800/600"
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop"
     tech:
       - "React"
       - "GraphQL"
       - "AWS"
     links:
-      live: "https://example.com"
-      code: "https://github.com/example/project-beta"
+      live: "https://project-beta.app"
+      code: "https://gitlab.com/janedoe/project-beta"  # Full URL overrides default forge
     featured: true
 
   - id: "project-3"
@@ -148,13 +178,13 @@ projects:
     description:
       en: "An open-source tool that helps developers be more productive."
       ar: "أداة مفتوحة المصدر تساعد المطورين على أن يكونوا أكثر إنتاجية."
-    image: "https://picsum.photos/seed/gamma/800/600"
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop"
     tech:
       - "TypeScript"
       - "CLI"
       - "Jest"
     links:
-      code: "https://github.com/example/project-gamma"
+      code: "https://codeberg.org/janedoe/project-gamma"  # Codeberg
     featured: true
 
   - id: "project-4"
@@ -164,18 +194,19 @@ projects:
     description:
       en: "A mobile app that solves a real-world problem."
       ar: "تطبيق جوال يحل مشكلة حقيقية."
-    image: "https://picsum.photos/seed/delta/800/600"
+    image: "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=800&h=600&fit=crop"
     tech:
       - "React Native"
       - "Firebase"
       - "Expo"
     links:
-      live: "https://example.com"
-      code: "https://github.com/example/project-delta"
+      live: "https://project-delta.io"
+      code: "https://sr.ht/~janedoe/project-delta"  # Sourcehut
     featured: true
 
 # ============================================
-# BLOG POSTS (if enabled)
+# BLOG POSTS
+# External links (only shown if sections.blog.enabled is true)
 # ============================================
 blog:
   posts:
@@ -201,9 +232,10 @@ blog:
 
 # ============================================
 # THEME CONFIGURATION
+# Colors for light and dark modes (hex values)
 # ============================================
 theme:
-  defaultMode: "system"
+  defaultMode: "system"                           # Options: "light", "dark", "system"
   colors:
     light:
       bgPrimary: "#FFFDF9"
@@ -226,6 +258,7 @@ theme:
 
 # ============================================
 # TYPOGRAPHY
+# Font families per locale (uses Fontsource - self-hosted)
 # ============================================
 typography:
   fonts:
@@ -238,12 +271,42 @@ typography:
 
 # ============================================
 # ANIMATIONS
+# Control all motion and interactive effects
 # ============================================
 animations:
-  enabled: true
-  respectReducedMotion: true
+  enabled: true                                  # Master switch: false disables ALL animations
+  respectReducedMotion: true                      # Honor prefers-reduced-motion browser setting
   hero:
-    cursorFollow: true
     toy: true
   scrollReveal: true
   hoverEffects: true
+  transitions:
+    theme:
+      enabled: true                              # Enable mascot + ripple theme transition
+    locale:
+      enabled: true                              # Enable locale transition effects
+      directionChange: "cardFlip"                # RTL↔LTR: "pageFlip" or "cardFlip"
+      sameDirection: "fade"                      # Same dir: "ripple" or "fade"
+
+# ============================================
+# SECURITY
+# Privacy and anti-spam features
+# ============================================
+security:
+  email:
+    obfuscate: true                              # Display email as "hello [at] example [dot] com"
+    clickToReveal: true                          # Require click to show real email
+  phone:
+    obfuscate: true                              # Display phone as "123***90" (mask middle digits)
+    clickToReveal: true                          # Require click to show real phone
+  telegram:
+    obfuscate: true                              # Display username as "@u***e" or phone masked
+    clickToReveal: true                          # Require click to show real telegram
+  whatsapp:
+    obfuscate: true                              # Display phone as "123***90" (mask middle digits)
+    clickToReveal: true                          # Require click to show real whatsapp
+  contact:
+    honeypot: true                               # Add hidden field to catch bots
+  externalLinks:
+    noopener: true                               # Add rel="noopener noreferrer" to external links
+    newTab: true                                 # Open external links in new tab
