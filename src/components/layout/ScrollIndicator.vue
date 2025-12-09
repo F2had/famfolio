@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import { useSettings } from '@/composables/useSettings'
 import IconChevronDown from '~icons/lucide/chevron-down'
 
 const { t } = useI18n()
+const { areAnimationsEnabled } = useSettings()
 
 const scrollDown = () => {
   const nextSection = document.getElementById('about')
@@ -15,7 +17,10 @@ const scrollDown = () => {
 <template>
   <button class="scroll-indicator" :aria-label="t('hero.scrollHint')" @click="scrollDown">
     <span class="scroll-indicator__text">{{ t('hero.scrollHint') }}</span>
-    <IconChevronDown class="scroll-indicator__icon" />
+    <IconChevronDown
+      class="scroll-indicator__icon"
+      :class="{ 'scroll-indicator__icon--animated': areAnimationsEnabled }"
+    />
   </button>
 </template>
 
@@ -43,7 +48,10 @@ const scrollDown = () => {
   &__icon {
     width: 24px;
     height: 24px;
-    animation: bounce 2s ease-in-out infinite;
+
+    &--animated {
+      animation: bounce 2s ease-in-out infinite;
+    }
   }
 }
 
@@ -64,7 +72,7 @@ const scrollDown = () => {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .scroll-indicator__icon {
+  .scroll-indicator__icon--animated {
     animation: none;
   }
 }

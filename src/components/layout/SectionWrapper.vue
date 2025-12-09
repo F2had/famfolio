@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useConfig } from '@/composables/useConfig'
+import { ref, reactive, computed, onMounted } from 'vue'
+import { useSpring } from '@vueuse/motion'
+import { useSettings } from '@/composables/useSettings'
 
 type Props = {
   id: string
@@ -9,12 +10,28 @@ type Props = {
 
 defineProps<Props>()
 
-const { animations } = useConfig()
+const { isScrollRevealEnabled } = useSettings()
 const sectionRef = ref<HTMLElement | null>(null)
 const isRevealed = ref(false)
 
+// Spring-based reveal animation
+const revealTarget = reactive({ opacity: 0, y: 30 })
+const revealSpring = useSpring(revealTarget, {
+  stiffness: 100,
+  damping: 20,
+})
+const revealValues = revealSpring.values as unknown as { opacity: number; y: number }
+const setReveal = revealSpring.set as (v: { opacity: number; y: number }) => void
+
+const revealStyle = computed(() => ({
+  opacity: revealValues.opacity,
+  transform: `translateY(${revealValues.y}px)`,
+}))
+
 onMounted(() => {
-  if (!animations.scrollReveal || !sectionRef.value) {
+  // Skip animations if disabled globally or scrollReveal specifically
+  if (!isScrollRevealEnabled.value || !sectionRef.value) {
+    setReveal({ opacity: 1, y: 0 })
     isRevealed.value = true
     return
   }
@@ -23,12 +40,13 @@ onMounted(() => {
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
+          setReveal({ opacity: 1, y: 0 })
           isRevealed.value = true
           observer.disconnect()
         }
       })
     },
-    { threshold: 0.1 }
+    { threshold: 0.1 },
   )
 
   observer.observe(sectionRef.value)
@@ -40,7 +58,8 @@ onMounted(() => {
     :id="id"
     ref="sectionRef"
     class="section-wrapper"
-    :class="{ 'section-wrapper--dark': dark, 'section-wrapper--revealed': isRevealed }"
+    :class="{ 'section-wrapper--dark': dark }"
+    :style="revealStyle"
   >
     <div class="section-wrapper__container">
       <slot />
@@ -51,19 +70,10 @@ onMounted(() => {
 <style scoped lang="scss">
 .section-wrapper {
   padding-block: var(--space-3xl);
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity var(--transition-slow),
-    transform var(--transition-slow);
+  will-change: opacity, transform;
 
   @media (min-width: 768px) {
     padding-block: var(--space-4xl);
-  }
-
-  &--revealed {
-    opacity: 1;
-    transform: translateY(0);
   }
 
   &--dark {
@@ -75,14 +85,6 @@ onMounted(() => {
     max-width: var(--container-max);
     margin-inline: auto;
     padding-inline: var(--container-padding);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .section-wrapper {
-    opacity: 1;
-    transform: none;
-    transition: none;
   }
 }
 </style>
