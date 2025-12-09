@@ -1,0 +1,262 @@
+# ============================================
+# DEMO CONFIGURATION
+# Example data for showcasing the template
+# ============================================
+
+site:
+  title: 'Jane Doe | Software Engineer'
+  description: 'Personal portfolio showcasing my work and skills.'
+  url: 'https://famfolio-demo.dev'
+  favicon:
+    svg: '/favicon.svg'
+  logo:
+    enabled: false
+    src: '/logo.svg'
+    alt: 'Site Logo'
+  defaultLocale: 'en'
+  supportedLocales:
+    - code: 'en'
+      name: 'English'
+      nativeName: 'English'
+      dir: 'ltr'
+    - code: 'ar'
+      name: 'Arabic'
+      nativeName: 'العربية'
+      dir: 'rtl'
+
+defaults:
+  codeForge: 'https://github.com/janedoe'
+
+personal:
+  name:
+    en: 'Jane'
+    ar: 'محمد'
+  lastName:
+    en: 'Doe'
+    ar: 'أحمد'
+  title:
+    en: 'Software Engineer'
+    ar: 'مهندس برمجيات'
+  tagline:
+    en: 'Building things that matter.'
+    ar: 'أبني أشياء ذات قيمة.'
+  email: 'hello@example.com'
+  phone: '+1234567890'
+  telegram: '@janedoe'
+  whatsapp: '+1234567890'
+  location:
+    en: 'Mecca, Saudi Arabia'
+    ar: 'مكة المكرمة'
+  avatar:
+    enabled: false
+    src: '/images/avatar.jpg'
+
+socials:
+  - platform: 'github'
+    url: 'https://github.com/janedoe'
+    icon: 'github'
+  - platform: 'linkedin'
+    url: 'https://linkedin.com/in/janedoe'
+    icon: 'linkedin'
+  - platform: 'twitter'
+    url: 'https://twitter.com/janedoe'
+    icon: 'twitter'
+  - platform: 'email'
+    url: 'mailto:hello@example.com'
+    icon: 'mail'
+
+sections:
+  hero:
+    enabled: true
+  about:
+    enabled: true
+  projects:
+    enabled: true
+  blog:
+    enabled: true
+  resume:
+    enabled: true
+    pdfPath: '/resume.pdf'
+  contact:
+    enabled: true
+    showForm: true
+    showEmail: true
+    showPhone: true
+    showTelegram: true
+    showWhatsapp: true
+
+about:
+  content:
+    en: |
+      I'm a software engineer passionate about building products that make
+      a difference. I enjoy solving complex problems and creating elegant
+      solutions that users love.
+
+      When I'm not coding, you'll find me reading, hiking, or experimenting
+      with new technologies.
+    ar: |
+      أنا مهندس برمجيات شغوف ببناء منتجات تحدث فرقاً.
+      أستمتع بحل المشكلات المعقدة وإنشاء حلول أنيقة يحبها المستخدمون.
+
+      عندما لا أكتب الكود، ستجدني أقرأ أو أتنزه أو أجرب تقنيات جديدة.
+
+skills:
+  - 'Vue'
+  - 'TypeScript'
+  - 'Node.js'
+  - 'Design Systems'
+
+projects:
+  - id: 'project-1'
+    title:
+      en: 'Project Alpha'
+      ar: 'مشروع ألفا'
+    description:
+      en: 'A brief description of what this project does and why it matters.'
+      ar: 'وصف موجز لما يفعله هذا المشروع ولماذا هو مهم.'
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop'
+    tech:
+      - 'Vue'
+      - 'Node.js'
+      - 'PostgreSQL'
+    links:
+      live: 'https://project-alpha.dev'
+      repo: 'project-alpha'
+    featured: true
+
+  - id: 'project-2'
+    title:
+      en: 'Project Beta'
+      ar: 'مشروع بيتا'
+    description:
+      en: 'Another amazing project with a compelling description.'
+      ar: 'مشروع رائع آخر مع وصف مقنع.'
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop'
+    tech:
+      - 'React'
+      - 'GraphQL'
+      - 'AWS'
+    links:
+      live: 'https://project-beta.app'
+      code: 'https://gitlab.com/janedoe/project-beta'
+    featured: true
+
+  - id: 'project-3'
+    title:
+      en: 'Project Gamma'
+      ar: 'مشروع جاما'
+    description:
+      en: 'An open-source tool that helps developers be more productive.'
+      ar: 'أداة مفتوحة المصدر تساعد المطورين على أن يكونوا أكثر إنتاجية.'
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop'
+    tech:
+      - 'TypeScript'
+      - 'CLI'
+      - 'Jest'
+    links:
+      code: 'https://codeberg.org/janedoe/project-gamma'
+    featured: true
+
+  - id: 'project-4'
+    title:
+      en: 'Project Delta'
+      ar: 'مشروع دلتا'
+    description:
+      en: 'A mobile app that solves a real-world problem.'
+      ar: 'تطبيق جوال يحل مشكلة حقيقية.'
+    image: 'https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=800&h=600&fit=crop'
+    tech:
+      - 'React Native'
+      - 'Firebase'
+      - 'Expo'
+    links:
+      live: 'https://project-delta.io'
+      code: 'https://sr.ht/~janedoe/project-delta'
+    featured: true
+
+blog:
+  posts:
+    - id: '1'
+      title:
+        en: 'Getting Started with Vue 3'
+        ar: 'البدء مع Vue 3'
+      date: '2024-01-15'
+      excerpt:
+        en: "A beginner's guide to building modern web applications with Vue 3."
+        ar: 'دليل المبتدئين لبناء تطبيقات الويب الحديثة باستخدام Vue 3.'
+      url: '#'
+
+    - id: '2'
+      title:
+        en: 'Why TypeScript Matters'
+        ar: 'لماذا TypeScript مهم'
+      date: '2023-09-12'
+      excerpt:
+        en: 'Exploring the benefits of type safety in JavaScript projects.'
+        ar: 'استكشاف فوائد أمان النوع في مشاريع JavaScript.'
+      url: '#'
+
+theme:
+  defaultMode: 'system'
+  colors:
+    light:
+      bgPrimary: '#FFFDF9'
+      bgSecondary: '#F7F4EE'
+      textPrimary: '#2D2926'
+      textSecondary: '#6B635A'
+      accent: '#C8873D'
+      accentHover: '#A66E2C'
+      accentSubtle: '#FDF6ED'
+      border: '#E8E4DC'
+    dark:
+      bgPrimary: '#1A1816'
+      bgSecondary: '#252220'
+      textPrimary: '#F5F2ED'
+      textSecondary: '#A69E94'
+      accent: '#E9A54D'
+      accentHover: '#F0B865'
+      accentSubtle: '#2E2519'
+      border: '#3A3632'
+
+typography:
+  fonts:
+    en:
+      display: 'Outfit'
+      body: 'Source Sans 3'
+    ar:
+      display: 'Tajawal'
+      body: 'IBM Plex Sans Arabic'
+
+animations:
+  enabled: true
+  respectReducedMotion: true
+  hero:
+    toy: true
+  scrollReveal: true
+  hoverEffects: true
+  transitions:
+    theme:
+      enabled: true
+    locale:
+      enabled: true
+      directionChange: 'cardFlip'
+      sameDirection: 'fade'
+
+security:
+  email:
+    obfuscate: true
+    clickToReveal: true
+  phone:
+    obfuscate: true
+    clickToReveal: true
+  telegram:
+    obfuscate: true
+    clickToReveal: true
+  whatsapp:
+    obfuscate: true
+    clickToReveal: true
+  contact:
+    honeypot: true
+  externalLinks:
+    noopener: true
+    newTab: true
