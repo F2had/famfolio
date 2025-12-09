@@ -698,7 +698,7 @@ Commits will fail if linting errors are found (`--max-warnings 1`).
 
 ## Contributing
 
-Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+Contributions are welcome! See [CONTRIBUTING.md](docs/CONTRIBUTING.md) for guidelines.
 
 ---
 
