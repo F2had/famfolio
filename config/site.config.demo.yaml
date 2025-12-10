@@ -260,3 +260,4 @@ security:
   externalLinks:
     noopener: true
     newTab: true
+    confirmLeave: true

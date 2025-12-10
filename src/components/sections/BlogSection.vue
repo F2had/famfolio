@@ -2,12 +2,24 @@
 import { useI18n } from 'vue-i18n'
 import { useConfig } from '@/composables/useConfig'
 import { useLocalizedValue } from '@/composables/useLocalizedValue'
+import { useExternalLink } from '@/composables/useExternalLink'
 import SectionWrapper from '@/components/layout/SectionWrapper.vue'
+import ExternalLinkDialog from '@/components/common/ExternalLinkDialog.vue'
 import IconArrowRight from '~icons/lucide/arrow-right'
 
 const { t } = useI18n()
 const { blog } = useConfig()
 const { localize } = useLocalizedValue()
+const {
+  relAttr,
+  targetAttr,
+  showDialog,
+  pendingUrl,
+  getDomain,
+  handleClick,
+  confirmNavigation,
+  cancelNavigation,
+} = useExternalLink()
 </script>
 
 <template>
@@ -17,7 +29,13 @@ const { localize } = useLocalizedValue()
 
     <div class="blog__list">
       <article v-for="post in blog.posts" :key="post.id" class="blog__post">
-        <a :href="post.url" target="_blank" rel="noopener noreferrer" class="blog__post-link">
+        <a
+          :href="post.url"
+          :target="targetAttr"
+          :rel="relAttr"
+          class="blog__post-link"
+          @click="(e) => handleClick(e, post.url)"
+        >
           <div class="blog__post-content">
             <time class="blog__post-date">{{ post.date }}</time>
             <h3 class="blog__post-title">{{ localize(post.title) }}</h3>
@@ -27,6 +45,13 @@ const { localize } = useLocalizedValue()
         </a>
       </article>
     </div>
+
+    <ExternalLinkDialog
+      :show="showDialog"
+      :domain="getDomain(pendingUrl)"
+      @confirm="confirmNavigation"
+      @cancel="cancelNavigation"
+    />
   </SectionWrapper>
 </template>
 

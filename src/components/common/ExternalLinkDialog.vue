@@ -1,98 +1,23 @@
 <script setup lang="ts">
-import { ref, computed, useAttrs } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useSettings } from '@/composables/useSettings'
 
-defineOptions({
-  inheritAttrs: false,
-})
+defineProps<{
+  show: boolean
+  domain: string
+}>()
 
-const attrs = useAttrs()
-
-const props = withDefaults(
-  defineProps<{
-    href: string
-    ariaLabel?: string
-    confirmLeave?: boolean
-  }>(),
-  {
-    confirmLeave: undefined,
-  },
-)
+const emit = defineEmits<{
+  confirm: []
+  cancel: []
+}>()
 
 const { t } = useI18n()
-const { isNoopenerEnabled, isNewTabEnabled, isConfirmLeaveEnabled } = useSettings()
-
-const showDialog = ref(false)
-
-// Check if the link is external (not starting with / or #)
-const isExternal = computed(() => {
-  return !props.href.startsWith('/') && !props.href.startsWith('#')
-})
-
-// Determine if confirmation should show (prop overrides global setting)
-const shouldConfirm = computed(() => {
-  if (!isExternal.value) return false
-  if (props.confirmLeave !== undefined) return props.confirmLeave
-  return isConfirmLeaveEnabled.value
-})
-
-// Compute rel attribute
-const relAttr = computed(() => {
-  if (!isExternal.value) return undefined
-  if (isNoopenerEnabled.value) return 'noopener noreferrer'
-  return undefined
-})
-
-// Compute target attribute
-const targetAttr = computed(() => {
-  if (!isExternal.value) return undefined
-  if (isNewTabEnabled.value) return '_blank'
-  return undefined
-})
-
-// Extract domain for display
-const domain = computed(() => {
-  try {
-    const url = new URL(props.href)
-    return url.hostname
-  } catch {
-    return props.href
-  }
-})
-
-const handleClick = (e: MouseEvent) => {
-  if (shouldConfirm.value) {
-    e.preventDefault()
-    showDialog.value = true
-  }
-}
-
-const confirmNavigation = () => {
-  showDialog.value = false
-  window.open(props.href, targetAttr.value ?? '_self', relAttr.value ? 'noopener,noreferrer' : '')
-}
-
-const cancelNavigation = () => {
-  showDialog.value = false
-}
 </script>
 
 <template>
-  <a
-    v-bind="attrs"
-    :href="href"
-    :rel="relAttr"
-    :target="targetAttr"
-    :aria-label="ariaLabel"
-    @click="handleClick"
-  >
-    <slot />
-  </a>
-
   <Teleport to="body">
     <Transition name="dialog">
-      <div v-if="showDialog" class="external-link-dialog" @click.self="cancelNavigation">
+      <div v-if="show" class="external-link-dialog" @click.self="emit('cancel')">
         <div class="external-link-dialog__content">
           <h3 class="external-link-dialog__title">{{ t('externalLink.title', 'Leaving Site') }}</h3>
           <p class="external-link-dialog__message">
@@ -102,13 +27,13 @@ const cancelNavigation = () => {
           <div class="external-link-dialog__actions">
             <button
               class="external-link-dialog__btn external-link-dialog__btn--cancel"
-              @click="cancelNavigation"
+              @click="emit('cancel')"
             >
               {{ t('externalLink.cancel', 'Cancel') }}
             </button>
             <button
               class="external-link-dialog__btn external-link-dialog__btn--confirm"
-              @click="confirmNavigation"
+              @click="emit('confirm')"
             >
               {{ t('externalLink.confirm', 'Continue') }}
             </button>
@@ -123,7 +48,7 @@ const cancelNavigation = () => {
 .external-link-dialog {
   position: fixed;
   inset: 0;
-  z-index: var(--z-modal, 400);
+  z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -202,7 +127,6 @@ const cancelNavigation = () => {
   }
 }
 
-// Dialog transition
 .dialog-enter-active,
 .dialog-leave-active {
   transition: opacity 0.2s ease;

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { reactive, computed, type Component } from 'vue'
 import { useSpring } from '@vueuse/motion'
-import { useSettings } from '@/composables/useSettings'
+import { useExternalLink } from '@/composables/useExternalLink'
+import ExternalLinkDialog from '@/components/common/ExternalLinkDialog.vue'
 
 // Brand icons from Simple Icons
 import IconGithub from '~icons/simple-icons/github'
@@ -36,11 +37,16 @@ const props = withDefaults(defineProps<Props>(), {
   size: 24,
 })
 
-const { isNoopenerEnabled, isNewTabEnabled } = useSettings()
-
-// Security attributes for external links
-const relAttr = computed(() => (isNoopenerEnabled.value ? 'noopener noreferrer' : undefined))
-const targetAttr = computed(() => (isNewTabEnabled.value ? '_blank' : undefined))
+const {
+  relAttr,
+  targetAttr,
+  showDialog,
+  pendingUrl,
+  getDomain,
+  handleClick,
+  confirmNavigation,
+  cancelNavigation,
+} = useExternalLink()
 
 // Map platform names to icons
 const iconMap: Record<string, Component> = {
@@ -116,6 +122,7 @@ const springStyle = computed(() => ({
     class="social-icon"
     :style="springStyle"
     :aria-label="ariaLabel"
+    @click="(e) => handleClick(e, url)"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
     @mousedown="handleMouseDown"
@@ -123,6 +130,13 @@ const springStyle = computed(() => ({
   >
     <component :is="resolvedIcon" :style="iconStyle" />
   </a>
+
+  <ExternalLinkDialog
+    :show="showDialog"
+    :domain="getDomain(pendingUrl)"
+    @confirm="confirmNavigation"
+    @cancel="cancelNavigation"
+  />
 </template>
 
 <style scoped lang="scss">

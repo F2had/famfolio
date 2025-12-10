@@ -187,6 +187,7 @@ export type ContactSecurityConfig = {
 export type ExternalLinksSecurityConfig = {
   noopener: boolean
   newTab: boolean
+  confirmLeave: boolean
 }
 
 export type SecurityConfig = {

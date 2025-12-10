@@ -129,6 +129,9 @@ export const useSettings = () => {
   /** Open external links in new tab */
   const isNewTabEnabled = computed(() => security?.externalLinks?.newTab ?? true)
 
+  /** Show confirmation before leaving site */
+  const isConfirmLeaveEnabled = computed(() => security?.externalLinks?.confirmLeave ?? true)
+
   return {
     // Animations
     areAnimationsEnabled,
@@ -173,5 +176,6 @@ export const useSettings = () => {
     isHoneypotEnabled,
     isNoopenerEnabled,
     isNewTabEnabled,
+    isConfirmLeaveEnabled,
   }
 }

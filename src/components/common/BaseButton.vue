@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { reactive, computed } from 'vue'
 import { useSpring } from '@vueuse/motion'
+import { useExternalLink } from '@/composables/useExternalLink'
+import ExternalLinkDialog from '@/components/common/ExternalLinkDialog.vue'
 
 type Props = {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost'
@@ -19,14 +21,27 @@ const props = withDefaults(defineProps<Props>(), {
   external: false,
 })
 
+const {
+  relAttr,
+  targetAttr,
+  showDialog,
+  pendingUrl,
+  getDomain,
+  handleClick,
+  confirmNavigation,
+  cancelNavigation,
+} = useExternalLink()
+
 const component = props.href ? 'a' : 'button'
-const linkAttrs = props.href
-  ? {
-      href: props.href,
-      target: props.external ? '_blank' : undefined,
-      rel: props.external ? 'noopener noreferrer' : undefined,
-    }
-  : {}
+const linkAttrs = computed(() =>
+  props.href
+    ? {
+        href: props.href,
+        target: props.external ? targetAttr.value : undefined,
+        rel: props.external ? relAttr.value : undefined,
+      }
+    : {},
+)
 
 // Spring-based press animation
 const pressTarget = reactive({ scale: 1 })
@@ -68,6 +83,7 @@ const buttonStyle = computed(() => ({
     ]"
     :style="buttonStyle"
     :disabled="disabled || loading"
+    @click="(e: MouseEvent) => props.external && props.href && handleClick(e, props.href)"
     @mousedown="handleMouseDown"
     @mouseup="handleMouseUp"
     @mouseleave="handleMouseLeave"
@@ -77,6 +93,13 @@ const buttonStyle = computed(() => ({
       <slot />
     </span>
   </component>
+
+  <ExternalLinkDialog
+    :show="showDialog"
+    :domain="getDomain(pendingUrl)"
+    @confirm="confirmNavigation"
+    @cancel="cancelNavigation"
+  />
 </template>
 
 <style scoped lang="scss">

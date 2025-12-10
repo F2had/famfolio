@@ -3,7 +3,8 @@ import { reactive, computed, type Component } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useSpring } from '@vueuse/motion'
 import { useLocalizedValue } from '@/composables/useLocalizedValue'
-import { useSettings } from '@/composables/useSettings'
+import { useExternalLink } from '@/composables/useExternalLink'
+import ExternalLinkDialog from '@/components/common/ExternalLinkDialog.vue'
 import type { Project } from '@/types/config'
 
 // Icons
@@ -24,14 +25,19 @@ const props = defineProps<Props>()
 
 const { t } = useI18n()
 const { localizedRef } = useLocalizedValue()
-const { isNoopenerEnabled, isNewTabEnabled } = useSettings()
+const {
+  relAttr,
+  targetAttr,
+  showDialog,
+  pendingUrl,
+  getDomain,
+  handleClick,
+  confirmNavigation,
+  cancelNavigation,
+} = useExternalLink()
 
 const title = localizedRef(props.project.title)
 const description = localizedRef(props.project.description)
-
-// Security attributes for external links
-const relAttr = computed(() => (isNoopenerEnabled.value ? 'noopener noreferrer' : undefined))
-const targetAttr = computed(() => (isNewTabEnabled.value ? '_blank' : undefined))
 
 // Icon map for code hosting platforms
 const codeIconMap: Record<string, Component> = {
@@ -144,6 +150,7 @@ const codeLinkStyle = computed(() => ({
           :rel="relAttr"
           class="project-card__link"
           :style="liveLinkStyle"
+          @click="(e) => handleClick(e, project.links.live!)"
           @mouseenter="setLiveLink({ scale: 1.1 })"
           @mouseleave="setLiveLink({ scale: 1 })"
           @mousedown="setLiveLink({ scale: 0.95 })"
@@ -159,6 +166,7 @@ const codeLinkStyle = computed(() => ({
           :rel="relAttr"
           class="project-card__link"
           :style="codeLinkStyle"
+          @click="(e) => handleClick(e, project.links.code!)"
           @mouseenter="setCodeLink({ scale: 1.1 })"
           @mouseleave="setCodeLink({ scale: 1 })"
           @mousedown="setCodeLink({ scale: 0.95 })"
@@ -169,6 +177,13 @@ const codeLinkStyle = computed(() => ({
         </a>
       </div>
     </div>
+
+    <ExternalLinkDialog
+      :show="showDialog"
+      :domain="getDomain(pendingUrl)"
+      @confirm="confirmNavigation"
+      @cancel="cancelNavigation"
+    />
   </article>
 </template>
 

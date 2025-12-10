@@ -218,7 +218,7 @@ blog:
       excerpt:
         en: "A beginner's guide to building modern web applications with Vue 3."
         ar: 'دليل المبتدئين لبناء تطبيقات الويب الحديثة باستخدام Vue 3.'
-      url: '#'
+      url: 'https://dev.to/example/getting-started-with-vue-3'
 
     - id: '2'
       title:
@@ -228,7 +228,7 @@ blog:
       excerpt:
         en: 'Exploring the benefits of type safety in JavaScript projects.'
         ar: 'استكشاف فوائد أمان النوع في مشاريع JavaScript.'
-      url: '#'
+      url: 'https://medium.com/example/why-typescript-matters'
 
 # ============================================
 # THEME CONFIGURATION
@@ -310,3 +310,4 @@ security:
   externalLinks:
     noopener: true # Add rel="noopener noreferrer" to external links
     newTab: true # Open external links in new tab
+    confirmLeave: true # Show confirmation dialog before leaving site
