@@ -32,6 +32,15 @@ const targetThemeColors = computed(() => {
   }
 })
 
+// Get the current theme colors (what we're transitioning FROM) - for the mascot
+const currentThemeColors = computed(() => {
+  const currentTheme = isDark.value ? theme.colors.dark : theme.colors.light
+  return {
+    accent: currentTheme.accent,
+    accentSubtle: currentTheme.accentSubtle,
+  }
+})
+
 // Clip path for reveal effect - grows from center outward
 const clipPath = computed(() => {
   const size = clipProgress.value
@@ -193,35 +202,35 @@ defineExpose({ triggerTransition })
         <div
           class="theme-transition__mascot-body"
           :style="{
-            borderColor: targetThemeColors.accent,
-            backgroundColor: targetThemeColors.accentSubtle,
+            borderColor: currentThemeColors.accent,
+            backgroundColor: currentThemeColors.accentSubtle,
           }"
         >
           <div class="theme-transition__mascot-eyes">
             <div
               class="theme-transition__mascot-eye"
-              :style="{ backgroundColor: targetThemeColors.accent }"
+              :style="{ backgroundColor: currentThemeColors.accent }"
             />
             <div
               class="theme-transition__mascot-eye"
-              :style="{ backgroundColor: targetThemeColors.accent }"
+              :style="{ backgroundColor: currentThemeColors.accent }"
             />
           </div>
         </div>
         <div
           class="theme-transition__mascot-glow"
-          :style="{ backgroundColor: targetThemeColors.accent }"
+          :style="{ backgroundColor: currentThemeColors.accent }"
         />
         <!-- Extra glow rings during charging -->
         <div
           v-if="isCharging"
           class="theme-transition__charge-ring theme-transition__charge-ring--1"
-          :style="{ borderColor: targetThemeColors.accent }"
+          :style="{ borderColor: currentThemeColors.accent }"
         />
         <div
           v-if="isCharging"
           class="theme-transition__charge-ring theme-transition__charge-ring--2"
-          :style="{ borderColor: targetThemeColors.accent }"
+          :style="{ borderColor: currentThemeColors.accent }"
         />
       </div>
     </div>
