@@ -43,12 +43,9 @@
   --text-6xl: 3.75rem; // 60px
   --text-7xl: 4.5rem; // 72px
 
-  --leading-none: 1;
   --leading-tight: 1.25;
-  --leading-snug: 1.375;
   --leading-normal: 1.5;
   --leading-relaxed: 1.625;
-  --leading-loose: 2;
 
   --tracking-tight: -0.025em;
   --tracking-normal: 0;
@@ -75,21 +72,14 @@ h2,
 h3,
 h4,
 h5,
-h6,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6 {
+h6 {
   font-family: var(--font-display);
   font-weight: 600;
   line-height: var(--leading-tight);
   color: var(--text-primary);
 }
 
-h1,
-.h1 {
+h1 {
   font-size: var(--text-5xl);
   font-weight: 700;
   letter-spacing: var(--tracking-tight);
@@ -103,8 +93,7 @@ h1,
   }
 }
 
-h2,
-.h2 {
+h2 {
   font-size: var(--text-3xl);
 
   @media (min-width: 768px) {
@@ -112,8 +101,7 @@ h2,
   }
 }
 
-h3,
-.h3 {
+h3 {
   font-size: var(--text-2xl);
 
   @media (min-width: 768px) {
@@ -121,18 +109,15 @@ h3,
   }
 }
 
-h4,
-.h4 {
+h4 {
   font-size: var(--text-xl);
 }
 
-h5,
-.h5 {
+h5 {
   font-size: var(--text-lg);
 }
 
-h6,
-.h6 {
+h6 {
   font-size: var(--text-base);
 }
 
@@ -145,16 +130,6 @@ p {
   &:last-child {
     margin-bottom: 0;
   }
-}
-
-.lead {
-  font-size: var(--text-xl);
-  line-height: var(--leading-relaxed);
-  color: var(--text-secondary);
-}
-
-.small {
-  font-size: var(--text-sm);
 }
 
 // -----------------------------------------------------------------------------
