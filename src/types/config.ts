@@ -1,5 +1,5 @@
 // Single source of truth for supported locales
-export const LOCALES = ['en', 'ar'] as const
+const LOCALES = ['en', 'ar'] as const
 
 export type LocaleCode = (typeof LOCALES)[number]
 
